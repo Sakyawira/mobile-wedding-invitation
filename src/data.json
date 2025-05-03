@@ -89,8 +89,7 @@
   "mapInfo": {
     "address1": "Apgujeong Public Garden La Robe Hall",
     "address2": "92 Mapo-daero, Mapo-gu, Seoul\nHyosung Harrington Square B Building, 7th Floor\n02-2197-0230",
-    "naverMap": "https://map.naver.com/p/directions/-/14132311.1099497,4514956.9078363,Apgujeong%20Public%20Garden,1929913788,PLACE_POI/-/transit?c=15.00,0,0,0,dh",
-    "kakaoMap": "https://map.kakao.com/?map_type=TYPE_MAP&target=car&rt=,,489503,1123003&rt1=&rt2=Apgujeong%20Public%20Garden&rtIds=,630786038",
+    "googleMap": "https://www.google.com/maps?q=37.54222,126.952708",
     "lat": 37.54222,
     "lon": 126.952708
   },
