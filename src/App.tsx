@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Heading1 } from '@/components/Text.tsx';
 import Wrapper from '@/components/Wrapper.tsx';
+import YouTubeLiveStream from '@/components/YouTubeLiveStream.tsx';
 import Account from '@/layout/Account/Account.tsx';
 import Container from '@/layout/Container.tsx';
 import FloatingBar from '@/layout/FloatingBar/FloatingBar.tsx';
@@ -46,6 +47,10 @@ function App() {
         <Wrapper ref={galleryRef}>
           <Heading1>Gallery</Heading1>
           <GalleryWrap />
+        </Wrapper>
+        <Wrapper>
+          <Heading1>Live Stream</Heading1>
+          <YouTubeLiveStream />
         </Wrapper>
         <Wrapper>
           <Heading1>Gift Information</Heading1>
