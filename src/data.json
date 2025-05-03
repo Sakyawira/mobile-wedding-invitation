@@ -29,18 +29,6 @@
           "account": "1234-56-789012",
           "kakaopayAccount": "",
           "tossAccount": ""
-        },
-        {
-          "name": "Djajadi",
-          "relation": "Father",
-          "bank": "BCA",
-          "account": "123-45-678901"
-        },
-        {
-          "name": "Silvi",
-          "relation": "Mother",
-          "bank": "BCA",
-          "account": "123-45-678901"
         }
       ]
     },
@@ -54,18 +42,6 @@
           "account": "1234-5678-9012",
           "kakaopayAccount": "",
           "tossAccount": ""
-        },
-        {
-          "name": "Aries",
-          "relation": "Father",
-          "bank": "BCA",
-          "account": "123-45-678901"
-        },
-        {
-          "name": "Rita",
-          "relation": "Mother",
-          "bank": "BCA",
-          "account": "123-45-678901"
         }
       ]
     }
