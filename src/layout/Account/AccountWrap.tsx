@@ -62,7 +62,8 @@ const AccountWrap = ({
 
 const Wrapper = styled.div`
   font-family: 'SUITE-Regular';
-  padding: 10px 0;
+  padding: 20px;
+  margin: 10px 0;
   border-bottom: 1px solid #dfdfdf;
   &:last-of-type {
     margin-bottom: 0;
@@ -96,7 +97,7 @@ const AccountInfo = styled.div``;
 const CopyButton = styled.button`
   border: none;
   border-radius: 5px;
-  padding: 0.1em 0.2em;
+  padding: 10px;
   cursor: pointer;
   gap: 2px;
   outline: none;

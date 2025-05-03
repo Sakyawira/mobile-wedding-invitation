@@ -51,7 +51,7 @@ const NameInput = styled.input`
   width: 100%;
   box-sizing: border-box;
   border-radius: 4px;
-  padding: 4px;
+  padding: 10px;
   font-size: 1rem;
   line-height: 1;
   outline: none;
@@ -65,7 +65,7 @@ const MessageInput = styled.textarea`
   height: 100%;
   box-sizing: border-box;
   border-radius: 4px;
-  padding: 4px;
+  padding: 10px;
   font-size: 1rem;
   line-height: 1.5;
   outline: none;
@@ -77,7 +77,7 @@ const MessageInput = styled.textarea`
 
 const SubmitButton = styled.button`
   width: 100%;
-  padding: 6px 12px;
+  padding: 10px 20px;
   border-radius: 4px;
   font-size: 1rem;
   line-height: 1.5;

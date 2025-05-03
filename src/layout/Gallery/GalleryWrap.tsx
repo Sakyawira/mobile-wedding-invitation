@@ -40,6 +40,7 @@ const ImageMoreWrap = styled.div<{ isMoreView: boolean }>`
       ? ''
       : '60vh'}; /* When isMoreView is true, no height limit; when false, limit to 195px */
   overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
 `;
 
 const WhiteGradientOverlay = styled.div`
@@ -57,10 +58,14 @@ const WhiteGradientOverlay = styled.div`
 const PlusButton = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding: 6px 12px;
+  padding: 10px 20px;
   font-size: 1rem;
   align-items: center;
   border-radius: 4px;
   border: 1px solid #dfdfdf;
   cursor: pointer;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
 `;

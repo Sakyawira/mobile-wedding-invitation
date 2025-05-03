@@ -1,4 +1,5 @@
 // import { useEffect, useState } from 'react';
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import data from 'data.json';
 // import { increment, onValue, ref, update } from 'firebase/database';
@@ -69,6 +70,11 @@ const FloatingBar = ({ isVisible }: { isVisible: boolean }) => {
 
 export default FloatingBar;
 
+const slideUp = keyframes`
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+`;
+
 const Nav = styled.nav<{ isVisible: boolean }>`
   min-width: 280px;
   position: fixed;
@@ -79,4 +85,5 @@ const Nav = styled.nav<{ isVisible: boolean }>`
   justify-content: center;
   gap: 5px;
   display: ${(props) => (props.isVisible ? 'flex' : 'none')};
+  animation: ${(props) => (props.isVisible ? slideUp : 'none')} 0.5s ease-out;
 `;

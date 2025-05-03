@@ -49,7 +49,7 @@ const HostContainer = styled.div`
 `;
 
 const HostDetails = styled.div`
-  padding: 0 55px;
+  padding: 10px 20px;
   justify-content: center;
   white-space: nowrap;
   display: flex;

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 const RoundButton = styled.button`
-  padding: 0.5em 1em;
+  padding: 10px 20px;
   border-radius: 20px;
   outline: none;
   box-shadow: none;
