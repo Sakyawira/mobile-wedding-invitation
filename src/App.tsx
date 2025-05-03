@@ -40,26 +40,32 @@ function App() {
         <Wrapper>
           <Main />
         </Wrapper>
+        <hr className="separator" />
         <Wrapper>
           <Heading1>Invitation</Heading1>
           <Invitation />
         </Wrapper>
+        <hr className="separator" />
         <Wrapper ref={galleryRef}>
           <Heading1>Gallery</Heading1>
           <GalleryWrap />
         </Wrapper>
+        <hr className="separator" />
         <Wrapper>
           <Heading1>Live Stream</Heading1>
           <YouTubeLiveStream />
         </Wrapper>
+        <hr className="separator" />
         <Wrapper>
           <Heading1>Gift Information</Heading1>
           <Account />
         </Wrapper>
+        <hr className="separator" />
         <Wrapper>
           <Heading1>Directions</Heading1>
           <Location />
         </Wrapper>
+        <hr className="separator" />
         <Wrapper>
           <Heading1>Messages to the Couple</Heading1>
           <Guestbook />
