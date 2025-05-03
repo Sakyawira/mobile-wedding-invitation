@@ -12,19 +12,10 @@ const CommentForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (!name || !message) {
-      alert('이름과 메시지를 채워주세요. 🥹');
+      alert('Please fill in your name and message. 😢');
     } else {
       e.preventDefault();
-      // TODO: 이름, 메시지, 생성시간, 작성날짜 저장.
-      // const guestbookMessage = {
-      //   sender: name,
-      //   message: message,
-      //   createdAt: serverTimestamp(),
-      //   date: new Date().toLocaleString(),
-      // };
-      // void push(guestbookRef, guestbookMessage);
-      //
-      // alert('메시지를 보냈습니다. 💌');
+      // TODO: Save name, message, creation time, and date.
       setName('');
       setMessage('');
     }
@@ -33,17 +24,17 @@ const CommentForm = () => {
   return (
     <FormWrapper onSubmit={handleSubmit}>
       <NameInput
-        placeholder="이름"
+        placeholder="Name"
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <MessageInput
-        placeholder="메시지"
+        placeholder="Message"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      <SubmitButton type="submit">등록</SubmitButton>
+      <SubmitButton type="submit">Submit</SubmitButton>
     </FormWrapper>
   );
 };

@@ -6,9 +6,9 @@ const Guestbook = () => {
   return (
     <GuestBookWrapper>
       <Heading2>
-        메시지를 남겨주세요.
+        Please leave a message.
         <br />
-        결혼식 하루 뒤, 신랑 신부에게 전달됩니다.
+        After the wedding, it will be delivered to the bride and groom.
       </Heading2>
       <CommentForm />
     </GuestBookWrapper>
