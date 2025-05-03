@@ -179,7 +179,7 @@ Duke & Duchess`},S0=[{host:"Groom's Side",accountInfo:[{name:"Sakyawira Ruslim",
   padding: 20px;
 `,V0=z.div`
   border: 30px solid transparent; /* Initial value for the border */
-  border-image-source: url('/background.png'); /* Set the image path */
+  border-image-source: url('./background.png'); /* Set the image path */
   border-image-slice: 30% 49%; /* Set the size of the image */
   border-image-width: 280px; /* Set the width of the border image */
   background-color: #ffffff;
