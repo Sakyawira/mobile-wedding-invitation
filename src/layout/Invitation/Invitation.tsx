@@ -11,12 +11,12 @@ const Invitation = () => {
       <Paragraph>{greeting.message}</Paragraph>
       <Host />
       <Caption textAlign={'center'}>{greeting.eventDetail}</Caption>
-      {/* TODO: 구글캘린더 추가하기 기능을 넣는다면 링크 수정 */}
+      {/* TODO: Update the link if adding Google Calendar functionality */}
       <RoundButton
         target="_blank"
         href=""
         rel="noreferrer">
-        구글 캘린더 추가하기
+        Add to Google Calendar
       </RoundButton>
     </InvitationWrapper>
   );

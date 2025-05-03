@@ -1,61 +1,45 @@
 {
   "greeting": {
-    "title": "SeMo 💍 HwangNaeMo\nWe are getting married!",
+    "title": "Sakyawira 💍 Debbie\nWe are getting married!",
     "message": "We are getting married.\n\nTo our dear ones who have always warmed us with their love.\nWe invite you to share the precious moment of our first step as a married couple.",
     "host": {
       "groom": {
-        "name": "SeMo",
-        "relation": "Son",
+        "name": "Sakyawira Ruslim",
+        "relation": "Groom: ",
         "parents": [
-          {
-            "relation": "Father",
-            "name": "Jang Father"
-          },
-          {
-            "relation": "Mother",
-            "name": "Lee Mother"
-          }
         ]
       },
       "bride": {
-        "name": "NaeMo",
-        "relation": "Daughter",
+        "name": "Debbie Hartono",
+        "relation": "Bride: ",
         "parents": [
-          {
-            "relation": "Father",
-            "name": "Hwang Father"
-          },
-          {
-            "relation": "Mother",
-            "name": "Lee Mother"
-          }
-        ]
+]
       }
     },
-    "eventDetail": "February 17, 2024 (Saturday) 14:00\nApgujeong Public Garden La Robe Hall"
+    "eventDetail": "February 28, 2026 (Saturday) 14:00\nDuke & Duchess"
   },
   "hostInfo": [
     {
       "host": "Groom's Side",
       "accountInfo": [
         {
-          "name": "Jang SeMo",
+          "name": "Sakyawira Ruslim",
           "relation": "Groom",
-          "bank": "Kakao Bank",
+          "bank": "CIMB Niaga",
           "account": "1234-56-789012",
           "kakaopayAccount": "",
           "tossAccount": ""
         },
         {
-          "name": "Jang Father",
+          "name": "Djajadi",
           "relation": "Father",
-          "bank": "NongHyup",
+          "bank": "BCA",
           "account": "123-45-678901"
         },
         {
-          "name": "Lee Mother",
+          "name": "Silvi",
           "relation": "Mother",
-          "bank": "NongHyup",
+          "bank": "BCA",
           "account": "123-45-678901"
         }
       ]
@@ -64,39 +48,39 @@
       "host": "Bride's Side",
       "accountInfo": [
         {
-          "name": "Hwang NaeMo",
+          "name": "Debbie Hartono",
           "relation": "Bride",
-          "bank": "Toss Bank",
+          "bank": "BCA",
           "account": "1234-5678-9012",
           "kakaopayAccount": "",
           "tossAccount": ""
         },
         {
-          "name": "Hwang Father",
+          "name": "Aries",
           "relation": "Father",
-          "bank": "NongHyup",
+          "bank": "BCA",
           "account": "123-45-678901"
         },
         {
-          "name": "Lee Mother",
+          "name": "Rita",
           "relation": "Mother",
-          "bank": "NongHyup",
+          "bank": "BCA",
           "account": "123-45-678901"
         }
       ]
     }
   ],
   "mapInfo": {
-    "address1": "Apgujeong Public Garden La Robe Hall",
-    "address2": "92 Mapo-daero, Mapo-gu, Seoul\nHyosung Harrington Square B Building, 7th Floor\n02-2197-0230",
-    "googleMap": "https://www.google.com/maps?q=37.54222,126.952708",
+    "address1": "Duke & Duchess",
+    "address2": "Jl. Achmad Adnawijaya No.132, Tegal Gundil, Kec. Bogor Utara, Kota Bogor, Jawa Barat 16152, Indonesia",
+    "googleMap": "https://maps.app.goo.gl/gqpyr2muUyM4HUjS9",
     "lat": 37.54222,
     "lon": 126.952708
   },
   "locationInfo": [
     {
-      "title": "📍 Subway",
-      "desc": "👉🏻 Line 5/6 Gongdeok Station Exit 7 (2 minutes on foot)\n👉🏻 Gyeongui-Jungang Line, Airport Railroad Gongdeok Station Exit 10 (30 seconds on foot)"
+      "title": "📍 Public Transport",
+      "desc": "👉🏻 From Bogor Station, take a commuter line train to Cilebut Station.\n👉🏻 From Cilebut Station, take an angkot (public minivan) route 08 to Jl. Achmad Adnawijaya.\n👉🏻 Walk 5 minutes to Duke & Duchess."
     },
     {
       "title": "📍 Parking Information",

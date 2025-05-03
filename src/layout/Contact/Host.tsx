@@ -30,10 +30,7 @@ const HostInfo = ({ person }: { person: BrideAndGroom }) => {
           ))}
         </>
       )}
-      <RelationText>
-        <div>of</div>
-        <Relation>{person.relation}</Relation>
-      </RelationText>
+      <Relation>{person.relation}</Relation>
       <HighlightedName>{person.name}</HighlightedName>
     </HostDetails>
   );
@@ -62,13 +59,13 @@ const HostDetails = styled.div`
   font-weight: 700;
 `;
 
-const RelationText = styled.div`
-  font-style: normal;
-  line-height: 26px;
-  width: 50px;
-  display: flex;
-  gap: 6px;
-`;
+// const RelationText = styled.div`
+//   font-style: normal;
+//   line-height: 26px;
+//   width: 50px;
+//   display: flex;
+//   gap: 6px;
+// `;
 
 const Relation = styled.div`
   width: inherit;

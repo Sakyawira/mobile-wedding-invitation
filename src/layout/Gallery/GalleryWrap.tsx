@@ -16,7 +16,7 @@ const GalleryWrap = () => {
         <PhotoGallery />
       </ImageMoreWrap>
       {!isMoreView && (
-        <PlusButton onClick={onClickImageMoreViewButton}>더보기</PlusButton>
+        <PlusButton onClick={onClickImageMoreViewButton}>Expand</PlusButton>
       )}
     </ContentsWrap>
   );
@@ -38,7 +38,7 @@ const ImageMoreWrap = styled.div<{ isMoreView: boolean }>`
   max-height: ${(props) =>
     props.isMoreView
       ? ''
-      : '60vh'}; /* isMoreView 상태가 true일 때는 높이 제한 없이, false일 때는 195px로 작게 보이도록 */
+      : '60vh'}; /* When isMoreView is true, no height limit; when false, limit to 195px */
   overflow: hidden;
 `;
 
