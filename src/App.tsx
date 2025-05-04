@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { startFallingPetals } from '@/assets/animations/fallingPetals';
+
 import { Heading1 } from '@/components/Text.tsx';
 import Wrapper from '@/components/Wrapper.tsx';
 import YouTubeLiveStream from '@/components/YouTubeLiveStream.tsx';
@@ -16,13 +18,13 @@ import Main from '@/layout/Main/Main.tsx';
 function App() {
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
   const sectionRefs = {
-    main: useRef(null),
-    invitation: useRef(null),
-    gallery: useRef(null),
-    liveStream: useRef(null),
-    giftInfo: useRef(null),
-    directions: useRef(null),
-    messages: useRef(null),
+    main: useRef<HTMLElement | null>(null),
+    invitation: useRef<HTMLElement | null>(null),
+    gallery: useRef<HTMLElement | null>(null),
+    liveStream: useRef<HTMLElement | null>(null),
+    giftInfo: useRef<HTMLElement | null>(null),
+    directions: useRef<HTMLElement | null>(null),
+    messages: useRef<HTMLElement | null>(null),
   };
 
   useEffect(() => {
@@ -50,13 +52,18 @@ function App() {
         }
       });
     };
-  }, []);
+  }, [sectionRefs]);
 
   useEffect(() => {
     AOS.init({
       duration: 1000, // Animation duration in milliseconds
       once: true, // Whether animation should happen only once
     });
+  }, []);
+
+  useEffect(() => {
+    const cleanup = startFallingPetals(); // Start the custom falling petals effect
+    return cleanup; // Ensure proper cleanup when the component unmounts
   }, []);
 
   return (
