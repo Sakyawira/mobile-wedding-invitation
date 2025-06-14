@@ -14,6 +14,7 @@ import Guestbook from '@/layout/Guestbook/Guestbook.tsx';
 import Invitation from '@/layout/Invitation/Invitation.tsx';
 import Location from '@/layout/Location/Location.tsx';
 import Main from '@/layout/Main/Main.tsx';
+import Timeline from '@/layout/Timeline/Timeline.tsx';
 
 function App() {
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
@@ -80,6 +81,11 @@ function App() {
       <Wrapper id="gallery" ref={sectionRefs.gallery} data-aos="fade-up">
         <Heading1>Gallery</Heading1>
         <GalleryWrap />
+      </Wrapper>
+      <hr className="separator" />
+      <Wrapper id="timeline" data-aos="fade-up">
+        <Heading1>Our Story Timeline</Heading1>
+        <Timeline />
       </Wrapper>
       <hr className="separator" />
       <Wrapper id="liveStream" ref={sectionRefs.liveStream} data-aos="fade-up">
