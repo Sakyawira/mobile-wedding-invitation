@@ -18,6 +18,7 @@ import Timeline from '@/layout/Timeline/Timeline.tsx';
 
 function App() {
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
+  const [isTimelineOpen, setIsTimelineOpen] = useState(false);
   const sectionRefs = {
     main: useRef<HTMLElement | null>(null),
     invitation: useRef<HTMLElement | null>(null),
@@ -85,7 +86,7 @@ function App() {
       <hr className="separator" />
       <Wrapper id="timeline" data-aos="fade-up">
         <Heading1>Our Story Timeline</Heading1>
-        <Timeline />
+        <Timeline isCollapsed={!isTimelineOpen} onExpand={() => setIsTimelineOpen(true)} />
       </Wrapper>
       <hr className="separator" />
       <Wrapper id="liveStream" ref={sectionRefs.liveStream} data-aos="fade-up">

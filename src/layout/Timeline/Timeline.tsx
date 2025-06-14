@@ -3,6 +3,7 @@ import 'react-vertical-timeline-component/style.min.css';
 import styled from '@emotion/styled';
 import images from '@/layout/Gallery/Images';
 import { PointTitle, Caption } from '@/components/Text';
+import { useState } from 'react';
 
 const timelineEvents = [
   {
@@ -31,25 +32,40 @@ const timelineEvents = [
   },
 ];
 
-const Timeline = () => (
-  <TimelineWrapper>
-    <VerticalTimeline lineColor="#e88ca6">
-      {timelineEvents.map((event, idx) => (
-        <VerticalTimelineElement
-          key={idx}
-          date={event.date}
-          iconStyle={{ background: '#e88ca6', color: '#fff', boxShadow: '0 0 0 4px #e6ece1' }}
-          contentStyle={{ background: '#fff', color: '#2F2120', border: '1px solid #e6ece1' }}
-          contentArrowStyle={{ borderRight: '7px solid #e6ece1' }}
-        >
-          <PointTitle>{event.title}</PointTitle>
-          <Caption>{event.description}</Caption>
-          <Image src={event.image} alt={event.title} />
-        </VerticalTimelineElement>
-      ))}
-    </VerticalTimeline>
-  </TimelineWrapper>
-);
+interface TimelineProps {
+  isCollapsed?: boolean;
+  onExpand?: () => void;
+}
+
+const Timeline = ({ isCollapsed = false, onExpand }: TimelineProps) => {
+  // Show 1 card when collapsed
+  const previewCount = 1;
+  return (
+    <TimelineWrapper style={{ position: 'relative', width: '100%', maxWidth: 500 }}>
+      <VerticalTimeline lineColor="#e88ca6">
+        {(isCollapsed ? timelineEvents.slice(0, previewCount) : timelineEvents).map((event, idx) => (
+          <VerticalTimelineElement
+            key={idx}
+            date={event.date}
+            iconStyle={{ background: '#e88ca6', color: '#fff', boxShadow: '0 0 0 4px #e6ece1' }}
+            contentStyle={{ background: '#fff', color: '#2F2120', border: '1px solid #e6ece1' }}
+            contentArrowStyle={{ borderRight: '7px solid #e6ece1' }}
+          >
+            <PointTitle>{event.title}</PointTitle>
+            <Caption>{event.description}</Caption>
+            <Image src={event.image} alt={event.title} />
+            {isCollapsed && idx === previewCount - 1 && (
+              <ExpandButton onClick={onExpand}>Show Full Timeline</ExpandButton>
+            )}
+          </VerticalTimelineElement>
+        ))}
+      </VerticalTimeline>
+      {isCollapsed && (
+        <FadeOverlay />
+      )}
+    </TimelineWrapper>
+  );
+};
 
 const TimelineWrapper = styled.div`
   width: 100%;
@@ -59,6 +75,7 @@ const TimelineWrapper = styled.div`
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(232, 140, 166, 0.08);
   padding: 20px 0;
+  position: relative;
 `;
 
 const Image = styled.img`
@@ -67,6 +84,35 @@ const Image = styled.img`
   border-radius: 12px;
   margin-top: 12px;
   box-shadow: 0 2px 8px rgba(232, 140, 166, 0.10);
+`;
+
+const ExpandButton = styled.button`
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px 0;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(90deg, #e88ca6 0%, #fcde70 100%);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(232, 140, 166, 0.10);
+  transition: background 0.2s, color 0.2s;
+  &:hover {
+    background: linear-gradient(90deg, #fcde70 0%, #e88ca6 100%);
+    color: #2F2120;
+  }
+`;
+
+const FadeOverlay = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(rgba(255,255,255,0) 0%, #fff 90%);
+  pointer-events: none;
 `;
 
 export default Timeline;
