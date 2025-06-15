@@ -79,6 +79,11 @@ function App() {
         <Invitation />
       </Wrapper>
       <hr className="separator" />
+      <Wrapper id="directions" ref={sectionRefs.directions} data-aos="fade-up">
+        <Heading1>Place & Time</Heading1>
+        <Location />
+      </Wrapper>
+      <hr className="separator" />
       <Wrapper id="gallery" ref={sectionRefs.gallery} data-aos="fade-up">
         <Heading1>Gallery</Heading1>
         <GalleryWrap />
@@ -97,11 +102,6 @@ function App() {
       <Wrapper id="giftInfo" ref={sectionRefs.giftInfo} data-aos="fade-up">
         <Heading1>Gift Information</Heading1>
         <Account />
-      </Wrapper>
-      <hr className="separator" />
-      <Wrapper id="directions" ref={sectionRefs.directions} data-aos="fade-up">
-        <Heading1>Directions</Heading1>
-        <Location />
       </Wrapper>
       <hr className="separator" />
       <Wrapper id="messages" ref={sectionRefs.messages} data-aos="fade-up">

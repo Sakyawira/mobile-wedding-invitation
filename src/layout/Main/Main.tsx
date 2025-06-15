@@ -14,7 +14,7 @@ const Main = () => {
     <div>
       <MainImg src={mainImg} />
       <MainTitle>{greeting.title}</MainTitle>
-      <SubTitle>{greeting.eventDetail}</SubTitle>
+      {/* <SubTitle>{greeting.eventDetail}</SubTitle> */}
     </div>
   );
 };

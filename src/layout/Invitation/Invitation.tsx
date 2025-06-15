@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import data from 'data.json';
 import Host from '../Contact/Host.tsx';
-import RoundButton from '@/components/RoundButton.tsx';
-import { Caption, Paragraph } from '@/components/Text.tsx';
+import { Paragraph } from '@/components/Text.tsx';
 
 const Invitation = () => {
   const { greeting } = data;
@@ -24,14 +23,6 @@ const Invitation = () => {
     <InvitationWrapper>
       <Paragraph>{greeting.message}</Paragraph>
       <Host />
-      <Caption textAlign={'center'}>{greeting.eventDetail}</Caption>
-      <RoundButton
-        id="google-calendar-link"
-        target="_blank"
-        href=""
-        rel="noreferrer">
-        Add to Google Calendar
-      </RoundButton>
     </InvitationWrapper>
   );
 };

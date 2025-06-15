@@ -10,6 +10,10 @@ const RoundButton = styled.button`
   color: #44484d;
   text-decoration: none;
   background-color: #e6ece1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `.withComponent('a');
 
 export default RoundButton;
