@@ -15,26 +15,38 @@ const timelineEvents = [
 	{
 		date: '2017',
 		title: 'Winning a Short Movie Competition',
-		description: 'Captured our love in frames.',
+		description: 'It was a romance movie, but we were just friends. Or so we thought.',
 		image: images[1].source,
 	},
 	{
 		date: '2019',
 		title: 'Annual Catchup',
-		description: 'Keeping in contact with each other through University.',
+		description: 'The ocean kept us apart, but we always found time once a year.',
 		image: images[2].source,
 	},
 	{
 		date: '2022',
 		title: 'Officially more than Friends',
-		description: 'Celebrating Debbie\'s birthday as a couple for the first time.',
+		description: 'Debbie’s birthday. This time, we’re not just friends.',
 		image: images[3].source,
 	},
   {
 		date: '2023',
-		title: 'First Anniversary',
-		description: 'A well deserved dinner after months of LDR.',
+		title: 'First Year Together',
+		description: 'Long distance, good food, and a lot of calls.',
 		image: images[5].source,
+	},
+  {
+    date: 'Q2 2024',
+    title: 'Engaged!',
+    description: 'Somewhere in Southeast Asia, she said yes.',
+    image: images[6].source,
+	},
+    {
+    date: 'Q4 2024',
+    title: 'Holiday in Bali',
+    description: 'Last deep breath before the chaos of immigration and weddding prep.',
+    image: images[7].source,
 	},
 ];
 
