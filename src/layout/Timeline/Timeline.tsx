@@ -1,118 +1,117 @@
+import styled from '@emotion/styled';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import styled from '@emotion/styled';
+import { Caption, PointTitle } from '@/components/Text';
 import images from '@/layout/Gallery/Images';
-import { PointTitle, Caption } from '@/components/Text';
-import { useState } from 'react';
+import './timeline-date-centered.css';
 
 const timelineEvents = [
-  {
-    date: 'Engagement',
-    title: 'We got engaged!',
-    description: 'A beautiful moment together.',
-    image: images[0].source,
-  },
-  {
-    date: 'Pre-wedding',
-    title: 'Pre-wedding Photoshoot',
-    description: 'Captured our love in photos.',
-    image: images[4].source,
-  },
-  {
-    date: 'Wedding Day',
-    title: 'Wedding Ceremony',
-    description: 'Our big day!',
-    image: images[7].source,
-  },
-  {
-    date: 'Reception',
-    title: 'Reception Party',
-    description: 'Celebrating with friends and family.',
-    image: images[10].source,
-  },
+	{
+		date: '2015',
+		title: 'Stranges to Best Friends',
+		description: 'A beautiful moment together.',
+		image: images[0].source,
+	},
+	{
+		date: 'Pre-wedding',
+		title: 'Pre-wedding Photoshoot',
+		description: 'Captured our love in photos.',
+		image: images[4].source,
+	},
+	{
+		date: 'Wedding Day',
+		title: 'Wedding Ceremony',
+		description: 'Our big day!',
+		image: images[7].source,
+	},
+	{
+		date: 'Reception',
+		title: 'Reception Party',
+		description: 'Celebrating with friends and family.',
+		image: images[10].source,
+	},
 ];
 
 interface TimelineProps {
-  isCollapsed?: boolean;
-  onExpand?: () => void;
+	isCollapsed?: boolean;
+	onExpand?: () => void;
 }
 
 const Timeline = ({ isCollapsed = false, onExpand }: TimelineProps) => {
-  // Show 1 card when collapsed
-  const previewCount = 1;
-  return (
-    <TimelineWrapper style={{ position: 'relative', width: '100%', maxWidth: 500 }}>
-      <VerticalTimeline lineColor="#e88ca6">
-        {(isCollapsed ? timelineEvents.slice(0, previewCount) : timelineEvents).map((event, idx) => (
-          <VerticalTimelineElement
-            key={idx}
-            date={event.date}
-            iconStyle={{ background: '#e88ca6', color: '#fff', boxShadow: '0 0 0 4px #e6ece1' }}
-            contentStyle={{ background: '#fff', color: '#2F2120', border: '1px solid #e6ece1' }}
-            contentArrowStyle={{ borderRight: '7px solid #e6ece1' }}
-          >
-            <PointTitle>{event.title}</PointTitle>
-            <Caption>{event.description}</Caption>
-            <Image src={event.image} alt={event.title} />
-            {isCollapsed && idx === previewCount - 1 && (
-              <ExpandButton onClick={onExpand}>Show Full Timeline</ExpandButton>
-            )}
-          </VerticalTimelineElement>
-        ))}
-      </VerticalTimeline>
-      {isCollapsed && (
-        <FadeOverlay />
-      )}
-    </TimelineWrapper>
-  );
+	// Show 1 card when collapsed
+	const previewCount = 1;
+	return (
+		<TimelineWrapper style={{ position: 'relative', width: '100%', maxWidth: 500 }}>
+			<VerticalTimeline lineColor="#e88ca6">
+				{(isCollapsed ? timelineEvents.slice(0, previewCount) : timelineEvents).map((event, idx) => (
+					<VerticalTimelineElement
+						key={idx}
+						date={event.date}
+						dateClassName="timeline-date-centered"
+						iconStyle={{ background: '#e88ca6', color: '#fff', boxShadow: '0 0 0 4px #e6ece1' }}
+						contentStyle={{ background: '#fff', color: '#2F2120', border: '1px solid #e6ece1' }}
+						contentArrowStyle={{ borderRight: '7px solid #e6ece1' }}
+					>
+						<PointTitle>{event.title}</PointTitle>
+						<Caption>{event.description}</Caption>
+						<Image src={event.image} alt={event.title} />
+						{isCollapsed && idx === previewCount - 1 && (
+							<ExpandButton onClick={onExpand}>Show Full Timeline</ExpandButton>
+						)}
+					</VerticalTimelineElement>
+				))}
+			</VerticalTimeline>
+			{isCollapsed && <FadeOverlay />}
+		</TimelineWrapper>
+	);
 };
 
 const TimelineWrapper = styled.div`
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(232, 140, 166, 0.08);
-  padding: 20px 0;
-  position: relative;
+	width: 100%;
+	max-width: 500px;
+	margin: 0 auto;
+	background: #ffffff;
+	border-radius: 16px;
+	box-shadow: 0 4px 12px rgba(232, 140, 166, 0.08);
+	padding: 20px 0;
+	position: relative;
 `;
 
 const Image = styled.img`
-  width: 100%;
-  max-width: 320px;
-  border-radius: 12px;
-  margin-top: 12px;
-  box-shadow: 0 2px 8px rgba(232, 140, 166, 0.10);
+	width: 100%;
+	max-width: 320px;
+	border-radius: 12px;
+	margin-top: 12px;
+	box-shadow: 0 2px 8px rgba(232, 140, 166, 0.1);
 `;
 
 const ExpandButton = styled.button`
-  width: 100%;
-  margin-top: 16px;
-  padding: 10px 0;
-  border-radius: 8px;
-  border: none;
-  background: linear-gradient(90deg, #e88ca6 0%, #fcde70 100%);
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(232, 140, 166, 0.10);
-  transition: background 0.2s, color 0.2s;
-  &:hover {
-    background: linear-gradient(90deg, #fcde70 0%, #e88ca6 100%);
-    color: #2F2120;
-  }
+	width: 100%;
+	margin-top: 16px;
+	padding: 10px 0;
+	border-radius: 8px;
+	border: none;
+	background: linear-gradient(90deg, #e88ca6 0%, #fcde70 100%);
+	color: #fff;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(232, 140, 166, 0.1);
+	transition: background 0.2s, color 0.2s;
+	&:hover {
+		background: linear-gradient(90deg, #fcde70 0%, #e88ca6 100%);
+		color: #2f2120;
+	}
 `;
 
 const FadeOverlay = styled.div`
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 80px;
-  background: linear-gradient(rgba(255,255,255,0) 0%, #fff 90%);
-  pointer-events: none;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 80px;
+	background: linear-gradient(rgba(255, 255, 255, 0) 0%, #fff 90%);
+	pointer-events: none;
 `;
 
 export default Timeline;
