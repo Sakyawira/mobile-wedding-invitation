@@ -8,27 +8,33 @@ import './timeline-date-centered.css';
 const timelineEvents = [
 	{
 		date: '2015',
-		title: 'Stranges to Best Friends',
-		description: 'A beautiful moment together.',
+		title: 'Strangers to Best Friends',
+		description: 'A school project brought us together for a couple photo. Fate?',
 		image: images[0].source,
 	},
 	{
-		date: 'Pre-wedding',
-		title: 'Pre-wedding Photoshoot',
-		description: 'Captured our love in photos.',
-		image: images[4].source,
+		date: '2017',
+		title: 'Winning a Short Movie Competition',
+		description: 'Captured our love in frames.',
+		image: images[1].source,
 	},
 	{
-		date: 'Wedding Day',
-		title: 'Wedding Ceremony',
-		description: 'Our big day!',
-		image: images[7].source,
+		date: '2019',
+		title: 'Annual Catchup',
+		description: 'Keeping in contact with each other through University.',
+		image: images[2].source,
 	},
 	{
-		date: 'Reception',
-		title: 'Reception Party',
-		description: 'Celebrating with friends and family.',
-		image: images[10].source,
+		date: '2022',
+		title: 'Officially more than Friends',
+		description: 'Celebrating Debbie\'s birthday as a couple for the first time.',
+		image: images[3].source,
+	},
+  {
+		date: '2023',
+		title: 'First Anniversary',
+		description: 'A well deserved dinner after months of LDR.',
+		image: images[5].source,
 	},
 ];
 

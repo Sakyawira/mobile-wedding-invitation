@@ -84,11 +84,6 @@ function App() {
         <Location />
       </Wrapper>
       <hr className="separator" />
-      <Wrapper id="gallery" ref={sectionRefs.gallery} data-aos="fade-up">
-        <Heading1>Gallery</Heading1>
-        <GalleryWrap />
-      </Wrapper>
-      <hr className="separator" />
       <Wrapper id="timeline" data-aos="fade-up">
         <Heading1>Our Story Timeline</Heading1>
         <Timeline isCollapsed={!isTimelineOpen} onExpand={() => setIsTimelineOpen(true)} />
@@ -107,6 +102,11 @@ function App() {
       <Wrapper id="messages" ref={sectionRefs.messages} data-aos="fade-up">
         <Heading1>Messages to the Couple</Heading1>
         <Guestbook />
+      </Wrapper>
+      <hr className="separator" />
+      <Wrapper id="gallery" ref={sectionRefs.gallery} data-aos="fade-up">
+        <Heading1>Gallery</Heading1>
+        <GalleryWrap />
       </Wrapper>
       <FloatingBar isVisible={Object.values(visibleSections).some(Boolean)} />
     </Container>
