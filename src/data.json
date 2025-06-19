@@ -20,20 +20,7 @@
   },
   "hostInfo": [
     {
-      "host": "Groom's Side",
-      "accountInfo": [
-        {
-          "name": "Sakyawira Ruslim",
-          "relation": "Groom",
-          "bank": "CIMB Niaga",
-          "account": "1234-56-789012",
-          "kakaopayAccount": "",
-          "tossAccount": ""
-        }
-      ]
-    },
-    {
-      "host": "Bride's Side",
+      "host": "Bride's Account",
       "accountInfo": [
         {
           "name": "Debbie Hartono",
