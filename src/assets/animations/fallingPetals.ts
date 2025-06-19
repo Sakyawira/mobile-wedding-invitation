@@ -1,3 +1,14 @@
+// Wind scaling constants
+const WIND_X_SCALE = 0.3;
+const WIND_Y_SCALE = 0.1;
+const PETAL_WIND_X_EFFECT = 0.1;
+const PETAL_WIND_X_RANDOM = 0.5;
+const PETAL_WIND_Y_EFFECT = 0.2;
+const PETAL_WIND_Y_RANDOM = 0.5;
+const PETAL_WIND_BLEND = 0.5;
+const PETAL_WIND_ROTATION = 0.02;
+const WIND_RADIUS = 200; // Only petals within this radius from mouse get wind
+
 class Petal {
   x = 0;
   y = 0;
@@ -8,6 +19,10 @@ class Petal {
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   color: string;
+  windX = 0;
+  windY = 0;
+  windDecay = 0.96; // how quickly wind effect fades
+  lastWindApplied = 0; // timestamp of last wind effect
 
   constructor(canvas: HTMLCanvasElement, sizeRange: [number, number], speedRange: [number, number], color: string) {
     this.canvas = canvas;
@@ -29,12 +44,34 @@ class Petal {
     this.spin = Math.random() * 0.02 - 0.01;
   }
 
-  update() {
-    this.y += this.speed;
-    this.angle += this.spin;
-    if (this.y > this.canvas.height) {
-      this.reset([1, 5], [0.5, 2]);
+  applyWind(wind: {x: number, y: number}, mouse: {x: number, y: number} | null) {
+    if (!mouse) return;
+    const dx = this.x - mouse.x;
+    const dy = this.y - mouse.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < WIND_RADIUS) {
+      // Wind effect falls off with distance (linear falloff)
+      const strength = 1 - dist / WIND_RADIUS;
+      const windEffectX = wind.x * (PETAL_WIND_X_EFFECT + Math.random() * PETAL_WIND_X_RANDOM) * strength;
+      const windEffectY = wind.y * (PETAL_WIND_Y_EFFECT + Math.random() * PETAL_WIND_Y_RANDOM) * strength;
+      this.windX = this.windX * this.windDecay + windEffectX * PETAL_WIND_BLEND;
+      this.windY = this.windY * this.windDecay + windEffectY * PETAL_WIND_BLEND;
+      this.lastWindApplied = Date.now();
     }
+  }
+
+  update() {
+    this.x += this.windX;
+    this.y += this.speed + this.windY;
+    this.angle += this.spin + this.windX * PETAL_WIND_ROTATION;
+    if (this.y > this.canvas.height || this.x < 0 || this.x > this.canvas.width) {
+      this.reset([1, 5], [0.5, 2]);
+      this.windX = 0;
+      this.windY = 0;
+    }
+    // Wind decays naturally
+    this.windX *= this.windDecay;
+    this.windY *= this.windDecay;
   }
 
   draw() {
@@ -72,12 +109,66 @@ export function startFallingPetals({
     canvas.height = window.innerHeight;
   }
 
+  const wind = { x: 0, y: 0 };
+  const windDecay = 0.95;
+  let isMouseDown = false;
+  let lastMouse = { x: 0, y: 0 };
+  let lastWindMouse: { x: number, y: number } | null = null;
+  let lastWind: { x: number, y: number } = { x: 0, y: 0 };
+
+  function onPointerDown(e: MouseEvent | TouchEvent) {
+    isMouseDown = true;
+    const point = 'touches' in e ? e.touches[0] : e;
+    lastMouse = { x: point.clientX, y: point.clientY };
+  }
+  function onPointerMove(e: MouseEvent | TouchEvent) {
+    if (!isMouseDown) return;
+    const point = 'touches' in e ? e.touches[0] : e;
+    const dx = point.clientX - lastMouse.x;
+    const dy = point.clientY - lastMouse.y;
+    wind.x = dx * WIND_X_SCALE;
+    wind.y = dy * WIND_Y_SCALE;
+    lastMouse = { x: point.clientX, y: point.clientY };
+  }
+  function onPointerUp(e: MouseEvent | TouchEvent) {
+    isMouseDown = false;
+    const point = 'touches' in e && e.changedTouches ? e.changedTouches[0] : (e as MouseEvent);
+    lastWindMouse = { x: point.clientX, y: point.clientY };
+    lastWind = { ...wind };
+  }
+
+  // Move all pointer event listeners to window for better drag experience
+  window.addEventListener('mousedown', onPointerDown);
+  window.addEventListener('mousemove', onPointerMove);
+  window.addEventListener('mouseup', onPointerUp);
+  window.addEventListener('touchstart', onPointerDown);
+  window.addEventListener('touchmove', onPointerMove);
+  window.addEventListener('touchend', onPointerUp);
+
   function animate() {
     ctx?.clearRect(0, 0, canvas.width, canvas.height);
     petals.forEach((petal) => {
+      // Only apply wind to petals near the last mouse up point
+      if (lastWindMouse && (Math.abs(lastWind.x) > 0.01 || Math.abs(lastWind.y) > 0.01)) {
+        petal.applyWind(lastWind, lastWindMouse);
+      }
       petal.update();
       petal.draw();
     });
+    // Decay wind after user stops dragging
+    if (!isMouseDown) {
+      wind.x *= windDecay;
+      wind.y *= windDecay;
+      if (Math.abs(wind.x) < 0.01) wind.x = 0;
+      if (Math.abs(wind.y) < 0.01) wind.y = 0;
+      // Decay lastWind as well
+      lastWind.x *= windDecay;
+      lastWind.y *= windDecay;
+      if (Math.abs(lastWind.x) < 0.01) lastWind.x = 0;
+      if (Math.abs(lastWind.y) < 0.01) lastWind.y = 0;
+      // Clear lastWindMouse if wind is gone
+      if (lastWind.x === 0 && lastWind.y === 0) lastWindMouse = null;
+    }
     requestAnimationFrame(animate);
   }
 
