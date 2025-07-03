@@ -4,12 +4,16 @@ import data from 'data.json';
 import { BrideAndGroom } from '@/types/data.ts';
 
 const Host = () => {
-  const { groom, bride } = data.greeting.host;
+  const { groom, bride, groomFather, groomMother, brideFather, brideMother } = data.greeting.host;
   return (
     <>
       <HostContainer>
         <HostInfo person={groom} />
         <HostInfo person={bride} />
+        <HostInfo person={groomFather as BrideAndGroom} />
+        <HostInfo person={groomMother as BrideAndGroom} />
+        <HostInfo person={brideFather as BrideAndGroom} />
+        <HostInfo person={brideMother as BrideAndGroom} />
       </HostContainer>
     </>
   );

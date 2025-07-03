@@ -13,7 +13,31 @@
         "name": "Debbie Hartono",
         "relation": "Bride: ",
         "parents": [
-]
+        ]
+      },
+      "groomMother": {
+        "name": "Silvi Oktavia Wijaya",
+        "relation": "Groom Mother: ",
+        "parents": [
+        ]
+      },
+      "groomFather": {
+        "name": "Djajadi Ruslim",
+        "relation": "Groom Father: ",
+        "parents": [
+        ]
+      },
+      "brideMother": {
+        "name": "Karuniawati Tjahjadi",
+        "relation": "Bride Mother: ",
+        "parents": [
+        ]
+      },
+      "brideFather": {
+        "name": "Aris Budiman Hartono",
+        "relation": "Bride Father: ",
+        "parents": [
+        ]
       }
     },
     "eventDetail": "August 16, 2025 (Saturday) 15:300"
