@@ -4,16 +4,17 @@ import data from 'data.json';
 import { BrideAndGroom } from '@/types/data.ts';
 
 const Host = () => {
-  const { groom, bride, groomFather, groomMother, brideFather, brideMother } = data.greeting.host;
+  const { groom, bride, groomFather, brideFather } = data.greeting.host;
   return (
     <>
       <HostContainer>
+        <h2>Groom</h2>
         <HostInfo person={groom} />
-        <HostInfo person={bride} />
         <HostInfo person={groomFather as BrideAndGroom} />
-        <HostInfo person={groomMother as BrideAndGroom} />
+        <span role="img" aria-label="pink heart">💗</span>
+        <h2>Bride</h2>
+        <HostInfo person={bride} />
         <HostInfo person={brideFather as BrideAndGroom} />
-        <HostInfo person={brideMother as BrideAndGroom} />
       </HostContainer>
     </>
   );
@@ -45,6 +46,7 @@ const HighlightedName = styled.span`
   font-size: 1.1rem;
   color: #4f4f4f;
   margin-right: 5px;
+  font-style: italic;
 `;
 
 const HostContainer = styled.div`

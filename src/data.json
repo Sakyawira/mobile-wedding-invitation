@@ -5,37 +5,25 @@
     "host": {
       "groom": {
         "name": "Sakyawira Ruslim",
-        "relation": "Groom: ",
+        "relation": "",
         "parents": [
         ]
       },
       "bride": {
         "name": "Debbie Hartono",
-        "relation": "Bride: ",
-        "parents": [
-        ]
-      },
-      "groomMother": {
-        "name": "Silvi Oktavia Wijaya",
-        "relation": "Groom Mother: ",
+        "relation": "",
         "parents": [
         ]
       },
       "groomFather": {
-        "name": "Djajadi Ruslim",
-        "relation": "Groom Father: ",
-        "parents": [
-        ]
-      },
-      "brideMother": {
-        "name": "Karuniawati Tjahjadi",
-        "relation": "Bride Mother: ",
+        "name": "Djajadi Ruslim & Silvi Oktavia Wijaya",
+        "relation": "Son of",
         "parents": [
         ]
       },
       "brideFather": {
-        "name": "Aris Budiman Hartono",
-        "relation": "Bride Father: ",
+        "name": "Aris Budiman Hartono & Karuniawati Tjahjadi",
+        "relation": "Daughter of ",
         "parents": [
         ]
       }
