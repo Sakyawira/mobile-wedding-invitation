@@ -40,16 +40,28 @@ function getOptimalPetalCount(requestedDensity: number): number {
   const performanceLevel = getDevicePerformanceLevel();
   const maxPetals = Math.min(requestedDensity, MAX_PETALS);
   
+  // Also consider screen size - smaller screens need fewer petals
+  const screenArea = window.innerWidth * window.innerHeight;
+  const baseArea = 400 * 800; // Base area for full petal count
+  const screenMultiplier = Math.min(1, screenArea / baseArea);
+  
+  let devicePetals: number;
   switch (performanceLevel) {
     case 'low':
-      return Math.min(maxPetals, 25); // Very conservative for low-end devices
+      devicePetals = Math.min(maxPetals, 25); // Very conservative for low-end devices
+      break;
     case 'medium':
-      return Math.min(maxPetals, 35); // Moderate for mid-range devices
+      devicePetals = Math.min(maxPetals, 35); // Moderate for mid-range devices
+      break;
     case 'high':
-      return maxPetals; // Use full amount for high-end devices
+      devicePetals = maxPetals; // Use full amount for high-end devices
+      break;
     default:
-      return Math.min(maxPetals, 30); // Safe default
+      devicePetals = Math.min(maxPetals, 30); // Safe default
   }
+  
+  // Apply screen size multiplier
+  return Math.max(10, Math.floor(devicePetals * screenMultiplier)); // Minimum 10 petals
 }
 
 class Petal {
@@ -83,9 +95,22 @@ class Petal {
   }
 
   reset(sizeRange: [number, number], speedRange: [number, number]) {
-    this.x = Math.random() * this.canvas.width;
-    this.y = Math.random() * this.canvas.height - this.canvas.height;
-    this.size = Math.random() * (sizeRange[1] - sizeRange[0]) + sizeRange[0];
+    // Ensure petals spawn within visible area with padding
+    const padding = 20; // Padding from edges
+    const maxX = Math.max(this.canvas.width - padding, padding);
+    const maxY = Math.max(this.canvas.height - padding, padding);
+    
+    this.x = Math.random() * maxX;
+    this.y = Math.random() * maxY - maxY; // Start above screen
+    
+    // Scale petal size based on screen size with smaller petals overall
+    const sizeMultiplier = Math.max(0.25, Math.min(0.7, this.canvas.width / 400)); // Reduced max from 1 to 0.7
+    const scaledSizeRange: [number, number] = [
+      Math.max(1, sizeRange[0] * sizeMultiplier), // Reduced minimum from 1.5px to 1px
+      Math.max(2.5, sizeRange[1] * sizeMultiplier)    // Reduced minimum from 3px to 2.5px
+    ];
+    
+    this.size = Math.random() * (scaledSizeRange[1] - scaledSizeRange[0]) + scaledSizeRange[0];
     this.speed = Math.random() * (speedRange[1] - speedRange[0]) + speedRange[0];
     this.angle = Math.random() * Math.PI * 2;
     this.spin = Math.random() * 0.02 - 0.01;
@@ -124,7 +149,13 @@ class Petal {
     this.y += this.speed + this.windY;
     this.angle += this.spin + this.windX * PETAL_WIND_ROTATION;
     
-    if (this.y > this.canvas.height || this.x < 0 || this.x > this.canvas.width) {
+    // More generous reset conditions for smaller screens
+    const resetMargin = 50; // Allow petals to go slightly off-screen before reset
+    const leftBound = -resetMargin;
+    const rightBound = this.canvas.width + resetMargin;
+    const bottomBound = this.canvas.height + resetMargin;
+    
+    if (this.y > bottomBound || this.x < leftBound || this.x > rightBound) {
       this.reset([1, 5], [0.5, 2]);
     }
     
@@ -139,10 +170,30 @@ class Petal {
     this.ctx.save();
     this.ctx.translate(this.x, this.y);
     this.ctx.rotate(this.angle);
-    this.ctx.fillStyle = this.color;
+    
+    // Cache mobile detection for performance
+    const isMobile = this.canvas.width < 500;
+    
+    // Optimize color setting - avoid regex replacement on every frame
+    if (isMobile) {
+      this.ctx.fillStyle = this.color.includes('0.7)') || this.color.includes('0.8)') 
+        ? this.color.replace(/0\.[78]\)/, '0.9)')
+        : this.color;
+    } else {
+      this.ctx.fillStyle = this.color;
+    }
+    
     this.ctx.beginPath();
     this.ctx.ellipse(0, 0, this.size, this.size * 1.5, 0, 0, Math.PI * 2);
     this.ctx.fill();
+    
+    // Add stroke only on mobile and only for very small petals
+    if (isMobile && this.size < 4) {
+      this.ctx.strokeStyle = 'rgba(255, 182, 193, 0.3)';
+      this.ctx.lineWidth = 0.5;
+      this.ctx.stroke();
+    }
+    
     this.ctx.restore();
   }
   
@@ -164,7 +215,8 @@ export function startFallingPetals({
   canvas.style.width = '100%';
   canvas.style.height = '100%';
   canvas.style.pointerEvents = 'none';
-  canvas.style.zIndex = '-1'; // Ensure petals stay behind content
+  canvas.style.zIndex = '1'; // Bring petals in front but behind interactive elements
+  canvas.style.overflow = 'hidden'; // Prevent scrollbars
   document.body.appendChild(canvas);
 
   const ctx = canvas.getContext('2d');
@@ -179,8 +231,14 @@ export function startFallingPetals({
   function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    // Reset petals positions after resize
-    petals.forEach(petal => petal.reset(sizeRange, speedRange));
+    
+    // Reset petals positions after resize to ensure they're visible
+    petals.forEach(petal => {
+      // Force petals to respawn in visible area
+      petal.reset(sizeRange, speedRange);
+      // Stagger the initial positions so they don't all appear at once
+      petal.y = Math.random() * canvas.height - canvas.height * 0.5;
+    });
   }
 
   const wind = { x: 0, y: 0 };

@@ -66,10 +66,10 @@ function App() {
   useEffect(() => {
     // Start falling petals with device-optimized settings
     const cleanup = startFallingPetals({
-      density: 40, // Reasonable default - will be automatically adjusted based on device
-      sizeRange: [2, 6],
-      speedRange: [0.8, 2.2],
-      color: 'rgba(255, 182, 193, 0.7)',
+      density: 30, // Reasonable default - will be automatically adjusted based on device
+      sizeRange: [2, 6], // Smaller base sizes for more delicate effect
+      speedRange: [0.5, 1.5], // Slower for better visibility
+      color: 'rgba(255, 182, 193, 0.9)', // Higher opacity for mobile
     });
     return cleanup; // Ensure proper cleanup when the component unmounts
   }, []);
