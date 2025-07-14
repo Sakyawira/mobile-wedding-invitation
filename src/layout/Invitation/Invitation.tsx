@@ -5,14 +5,27 @@ import Host from '../Contact/Host.tsx';
 import { Paragraph } from '@/components/Text.tsx';
 
 const Invitation = () => {
-  const { greeting } = data;
+  const { greeting, mapInfo, locationInfo } = data;
 
   useEffect(() => {
+    // Parse the date from greeting.eventDetail: "August 16, 2025 (Saturday) 15:300"
+    // Note: There's a typo in your data - "15:300" should be "15:30"
+    const eventDate = new Date('2025-08-16T15:30:00'); // August 16, 2025 at 3:30 PM
+    const endDate = new Date(eventDate.getTime() + 2 * 60 * 60 * 1000); // Add 2 hours
+    
+    // Format dates for Google Calendar (YYYYMMDDTHHMMSSZ)
+    const startDateStr = eventDate.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    const endDateStr = endDate.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    
+    // Use the actual location from data.json
+    const location = mapInfo.address1 || locationInfo[1].desc || '';
+    
     const calendarLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-      greeting.title
-    )}&dates=20250217T050000Z/20250217T070000Z&details=${encodeURIComponent(
+      'Sakyawira & Debbie Wedding'
+    )}&dates=${startDateStr}/${endDateStr}&details=${encodeURIComponent(
       greeting.message
-    )}&location=${encodeURIComponent(greeting.eventDetail)}`;
+    )}&location=${encodeURIComponent(location)}`;
+    
     const calendarLinkElement = document.getElementById('google-calendar-link');
     if (calendarLinkElement) {
       calendarLinkElement.setAttribute('href', calendarLink);

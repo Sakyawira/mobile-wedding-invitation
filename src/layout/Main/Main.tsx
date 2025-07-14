@@ -10,10 +10,20 @@ const fadeIn = keyframes`
 
 const Main = () => {
   const { greeting } = data;
+  
+  // Extract name parameter from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const name = urlParams.get('name');
+  
+  // Create dynamic title
+  const dynamicTitle = name 
+    ? `Hi, ${name}! 💍 Sakya & Debbie are getting married - come celebrate! 🎉✨`
+    : greeting.title;
+  
   return (
     <div>
       <MainImg src={mainImg} />
-      <MainTitle>{greeting.title}</MainTitle>
+      <MainTitle>{dynamicTitle}</MainTitle>
       {/* <SubTitle>{greeting.eventDetail}</SubTitle> */}
     </div>
   );
@@ -21,6 +31,7 @@ const Main = () => {
 
 export default Main;
 
+// ...existing code...
 const MainImg = styled.img`
   border-radius: 200px 200px 0 0;
   width: 90%;
@@ -37,13 +48,4 @@ const MainTitle = styled.p`
   white-space: pre-line;
   margin: 10px 0;
   animation: ${fadeIn} 1.2s ease-out;
-`;
-
-const SubTitle = styled.p`
-  font-size: 1.1rem;
-  color: #2F2120;
-  line-height: 140%;
-  white-space: pre-line;
-  margin: 10px 0;
-  animation: ${fadeIn} 1.4s ease-out;
 `;
