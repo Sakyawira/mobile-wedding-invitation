@@ -47,15 +47,27 @@ const HighlightedName = styled.span`
   color: #4f4f4f;
   margin-right: 5px;
   font-style: italic;
+  word-break: break-word;
+  hyphens: auto;
   
-  /* Galaxy S20 specific breakpoint (360px width) */
-  @media (max-width: 360px) {
+  /* Large phones and tablets */
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
+  
+  /* Galaxy S20/S24 Ultra and similar */
+  @media (max-width: 412px) {
     font-size: 0.95rem;
+  }
+  
+  /* Galaxy S20 regular and similar */
+  @media (max-width: 360px) {
+    font-size: 0.9rem;
   }
   
   /* Extra small devices */
   @media (max-width: 320px) {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 `;
 
@@ -63,50 +75,79 @@ const HostContainer = styled.div`
   gap: 8px;
   font-family: HSSanTokki20-Regular, serif;
   max-width: 100%;
-  padding: 0 8px;
+  padding: 0 4px;
+  box-sizing: border-box;
 `;
 
 const HostDetails = styled.div`
-  padding: 10px 20px;
+  padding: 10px 8px;
   justify-content: center;
-  white-space: nowrap;
   display: flex;
   gap: 6px;
   text-align: center;
   align-items: center;
   font-weight: 700;
   max-width: 100%;
+  min-width: 0;
   overflow-wrap: break-word;
   word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  white-space: normal;
+  flex-wrap: wrap;
   
-  /* Galaxy S20 specific breakpoint (360px width) */
-  @media (max-width: 360px) {
-    padding: 8px 16px;
+  /* Large phones and tablets */
+  @media (max-width: 480px) {
+    padding: 8px 4px;
     gap: 4px;
+    font-size: 0.95rem;
+  }
+  
+  /* Galaxy S20/S24 Ultra and similar */
+  @media (max-width: 412px) {
+    padding: 6px 2px;
+    gap: 3px;
     font-size: 0.9rem;
-    white-space: normal;
-    flex-wrap: wrap;
+  }
+  
+  /* Galaxy S20 regular and similar */
+  @media (max-width: 360px) {
+    padding: 4px 1px;
+    gap: 2px;
+    font-size: 0.85rem;
   }
   
   /* Extra small devices */
   @media (max-width: 320px) {
-    padding: 6px 12px;
-    gap: 3px;
-    font-size: 0.85rem;
+    padding: 4px 0px;
+    gap: 2px;
+    font-size: 0.8rem;
   }
 `;
 
-
 const Relation = styled.div`
-  width: inherit;
+  width: auto;
+  min-width: 0;
+  word-break: break-word;
+  hyphens: auto;
   
-  /* Galaxy S20 specific breakpoint (360px width) */
-  @media (max-width: 360px) {
+  /* Large phones and tablets */
+  @media (max-width: 480px) {
+    font-size: 0.95rem;
+  }
+  
+  /* Galaxy S20/S24 Ultra and similar */
+  @media (max-width: 412px) {
     font-size: 0.9rem;
+  }
+  
+  /* Galaxy S20 regular and similar */
+  @media (max-width: 360px) {
+    font-size: 0.85rem;
   }
   
   /* Extra small devices */
   @media (max-width: 320px) {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 `;
