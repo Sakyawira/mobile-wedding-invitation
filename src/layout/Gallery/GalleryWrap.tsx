@@ -1,16 +1,13 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 import styled from '@emotion/styled';
 import PhotoGallery from './PhotoGallery.tsx';
 
 const GalleryWrap = () => {
   const [isMoreView, setIsMoreView] = useState(false);
 
-  const onClickImageMoreViewButton = useCallback(() => {
+  const onClickImageMoreViewButton = () => {
     setIsMoreView(!isMoreView);
-  }, [isMoreView]);
-
-  // Memoize button text
-  const buttonText = useMemo(() => (isMoreView ? 'Collapse' : 'Expand'), [isMoreView]);
+  };
 
   return (
     <ContentsWrap>
@@ -19,7 +16,7 @@ const GalleryWrap = () => {
         <PhotoGallery />
       </ImageMoreWrap>
       {!isMoreView && (
-        <PlusButton onClick={onClickImageMoreViewButton}>{buttonText}</PlusButton>
+        <PlusButton onClick={onClickImageMoreViewButton}>Expand</PlusButton>
       )}
     </ContentsWrap>
   );
@@ -41,7 +38,7 @@ const ImageMoreWrap = styled.div<{ isMoreView: boolean }>`
   max-height: ${(props) =>
     props.isMoreView
       ? ''
-      : '60vh'}; /* When isMoreView is true, no height limit; when false, limit to 60vh */
+      : '60vh'}; /* When isMoreView is true, no height limit; when false, limit to 195px */
   overflow: hidden;
   transition: max-height 0.5s ease-in-out;
 `;
@@ -56,8 +53,6 @@ const WhiteGradientOverlay = styled.div`
     rgba(255, 255, 255, 0) 0%,
     rgb(255, 255, 255) 90%
   );
-  pointer-events: none; /* Allow clicking through overlay */
-  z-index: 1;
 `;
 
 const PlusButton = styled.div`
@@ -65,19 +60,12 @@ const PlusButton = styled.div`
   box-sizing: border-box;
   padding: 10px 20px;
   font-size: 1rem;
-  text-align: center;
   align-items: center;
   border-radius: 4px;
   border: 1px solid #dfdfdf;
   cursor: pointer;
   transition: transform 0.3s ease;
-  background: #fff;
-  
   &:hover {
     transform: scale(1.05);
-  }
-  
-  &:active {
-    transform: scale(0.95);
   }
 `;
