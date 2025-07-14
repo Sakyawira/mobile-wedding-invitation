@@ -21,7 +21,7 @@ const Invitation = () => {
 
   return (
     <InvitationWrapper>
-      <Paragraph>{greeting.message}</Paragraph>
+      <StyledParagraph>{greeting.message}</StyledParagraph>
       <Host />
     </InvitationWrapper>
   );
@@ -34,4 +34,29 @@ const InvitationWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  padding: 0 16px;
+  max-width: 100%;
+`;
+
+const StyledParagraph = styled(Paragraph)`
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  max-width: 100%;
+  text-align: center;
+  line-height: 1.5;
+  
+  /* Galaxy S20 specific breakpoint (360px width) */
+  @media (max-width: 360px) {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    padding: 0 8px;
+  }
+  
+  /* Extra small devices */
+  @media (max-width: 320px) {
+    font-size: 0.85rem;
+    line-height: 1.3;
+    padding: 0 4px;
+  }
 `;
