@@ -1,30 +1,20 @@
-// import { useEffect, useState } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import data from 'data.json';
-// import { increment, onValue, ref, update } from 'firebase/database';
-// import { realtimeDb } from 'firebase.ts';
 import JSConfetti from 'js-confetti';
 import Heart from '@/assets/icons/heart_plus.svg?react';
 import Share from '@/assets/icons/share.svg?react';
 import Upward from '@/assets/icons/upward.svg?react';
 import Button from '@/components/Button.tsx';
 
-const FloatingBar = ({ isVisible }: { isVisible: boolean }) => {
+const FloatingBar = memo(({ isVisible }: { isVisible: boolean }) => {
   const { emojis } = data;
 
-  // TODO: If you want to use the count feature, connect to Firebase Realtime DB!
-  // const [count, setCount] = useState(0);
+  // Memoize JSConfetti instance to avoid recreation
+  const jsConfetti = useMemo(() => new JSConfetti(), []);
 
-  // useEffect(() => {
-  // TODO: Add a 'likes' object to the Realtime DB.
-  //   const dbRef = ref(realtimeDb, 'likes');
-  //   onValue(dbRef, (snapshot) => {
-  //     setCount(Number(snapshot.val()));
-  //   });
-  // }, []);
-
-  const handleCopy = () => {
+  const handleCopy = useCallback(() => {
     navigator.clipboard.writeText(window.location.href).then(
       () => {
         alert('Address copied successfully. 😉😉');
@@ -33,22 +23,15 @@ const FloatingBar = ({ isVisible }: { isVisible: boolean }) => {
         alert('Failed to copy the address. 🥲🥲');
       },
     );
-  };
+  }, []);
 
-  const handleCount = () => {
+  const handleCount = useCallback(() => {
     void jsConfetti.addConfetti({ emojis });
+  }, [jsConfetti, emojis]);
 
-    // Increment the likes count when the button is clicked
-    // const dbRef = ref(realtimeDb);
-    // void update(dbRef, {
-    //   likes: increment(1),
-    // });
-  };
-
-  const jsConfetti = new JSConfetti();
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
 
   return (
     <Nav isVisible={isVisible}>
@@ -66,7 +49,9 @@ const FloatingBar = ({ isVisible }: { isVisible: boolean }) => {
       </Button>
     </Nav>
   );
-};
+});
+
+FloatingBar.displayName = 'FloatingBar';
 
 export default FloatingBar;
 
@@ -86,4 +71,17 @@ const Nav = styled.nav<{ isVisible: boolean }>`
   gap: 5px;
   display: ${(props) => (props.isVisible ? 'flex' : 'none')};
   animation: ${(props) => (props.isVisible ? slideUp : 'none')} 0.5s ease-out;
+  z-index: 1000;
+  
+  @media (max-width: 768px) {
+    min-width: 250px;
+    bottom: 20px;
+    gap: 3px;
+  }
+  
+  @media (max-width: 480px) {
+    min-width: 200px;
+    bottom: 15px;
+    gap: 2px;
+  }
 `;

@@ -1,3 +1,13 @@
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+/* Reduce layout thrashing */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: SUITE-Regular, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -17,13 +27,23 @@ body {
   display: flex;
   justify-content: center;
   background-color: #E0E7D9;
+  
+  /* Performance optimizations */
+  will-change: auto;
+  transform: translateZ(0); /* Force hardware acceleration */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
 }
 
+/* Preload font families with font-display: swap for better performance */
 @font-face {
   font-family: 'HSSanTokki20-Regular';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/HSSanTokki20-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
+  font-display: swap; /* Improve font loading performance */
 }
 
 @font-face {
@@ -31,6 +51,26 @@ body {
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
+  font-display: swap; /* Improve font loading performance */
+}
+
+/* Optimize images for better performance */
+img {
+  max-width: 100%;
+  height: auto;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  /* Prevent image dragging for better UX */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Hardware acceleration for smooth transitions */
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* Soften the shadow for the separator */
@@ -43,4 +83,49 @@ body {
   max-width: 500px; /* Match the container's max width */
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Soften the shadow */
   border-radius: 4px; /* Add rounded corners */
+}
+
+/* Optimize animations and transitions */
+*,
+*::before,
+*::after {
+  /* Reduce repaints and reflows */
+  will-change: auto;
+}
+
+/* Smooth scrolling container */
+#root {
+  contain: layout style paint;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Mobile-first media queries for better performance */
+@media (max-width: 768px) {
+  body {
+    min-width: 320px;
+  }
+  
+  .separator {
+    width: 95%;
+    margin: 20px auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .separator {
+    width: 98%;
+    margin: 15px auto;
+  }
 }

@@ -1,9 +1,53 @@
+import { memo, useCallback, useState } from 'react';
 import styled from '@emotion/styled';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import { Caption, PointTitle } from '@/components/Text';
 import images from '@/layout/Gallery/Images';
 import './timeline-date-centered.css';
+
+// Lazy image component for timeline
+const LazyTimelineImage = memo(({ src, alt, title }: { src: string; alt: string; title: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
+  const handleLoad = useCallback(() => {
+    setIsLoaded(true);
+  }, []);
+
+  const handleError = useCallback(() => {
+    setHasError(true);
+  }, []);
+
+  if (hasError) {
+    return (
+      <ImagePlaceholder>
+        Image failed to load
+      </ImagePlaceholder>
+    );
+  }
+
+  return (
+    <ImageContainer>
+      {!isLoaded && (
+        <ImagePlaceholder>
+          Loading image...
+        </ImagePlaceholder>
+      )}
+      <Image
+        src={src}
+        alt={alt}
+        title={title}
+        onLoad={handleLoad}
+        onError={handleError}
+        loading="lazy"
+        style={{ opacity: isLoaded ? 1 : 0 }}
+      />
+    </ImageContainer>
+  );
+});
+
+LazyTimelineImage.displayName = 'LazyTimelineImage';
 
 const timelineEvents = [
 	{
@@ -55,7 +99,7 @@ interface TimelineProps {
 	onExpand?: () => void;
 }
 
-const Timeline = ({ isCollapsed = false, onExpand }: TimelineProps) => {
+const Timeline = memo(({ isCollapsed = false, onExpand }: TimelineProps) => {
 	// Show 1 card when collapsed
 	const previewCount = 1;
 	return (
@@ -72,7 +116,7 @@ const Timeline = ({ isCollapsed = false, onExpand }: TimelineProps) => {
 					>
 						<PointTitle>{event.title}</PointTitle>
 						<Caption>{event.description}</Caption>
-						<Image src={event.image} alt={event.title} />
+						<LazyTimelineImage src={event.image} alt={event.title} title={event.title} />
 						{isCollapsed && idx === previewCount - 1 && (
 							<ExpandButton onClick={onExpand}>Show Full Timeline</ExpandButton>
 						)}
@@ -82,7 +126,9 @@ const Timeline = ({ isCollapsed = false, onExpand }: TimelineProps) => {
 			{isCollapsed && <FadeOverlay />}
 		</TimelineWrapper>
 	);
-};
+});
+
+Timeline.displayName = 'Timeline';
 
 const TimelineWrapper = styled.div`
 	width: 100%;
@@ -95,12 +141,37 @@ const TimelineWrapper = styled.div`
 	position: relative;
 `;
 
+const ImageContainer = styled.div`
+	position: relative;
+	width: 100%;
+	max-width: 320px;
+	margin-top: 12px;
+`;
+
+const ImagePlaceholder = styled.div`
+	width: 100%;
+	height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f0f0f0;
+	color: #666;
+	border-radius: 12px;
+	font-size: 14px;
+`;
+
 const Image = styled.img`
 	width: 100%;
 	max-width: 320px;
 	border-radius: 12px;
 	margin-top: 12px;
 	box-shadow: 0 2px 8px rgba(232, 140, 166, 0.1);
+	transition: opacity 0.3s ease;
+	
+	/* Performance optimizations */
+	transform: translateZ(0);
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
 `;
 
 const ExpandButton = styled.button`
