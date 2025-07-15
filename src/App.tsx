@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { startFallingPetals } from '@/assets/animations/fallingPetals';
+import WhaleSeaImage from '@/assets/images/whaleseal.png';
 
 import { Heading1 } from '@/components/Text.tsx';
 import Wrapper from '@/components/Wrapper.tsx';
@@ -151,7 +152,7 @@ function App() {
             We hope to see you soon! 💕
           </p>
         <img 
-          src="/whaleseal.png" 
+          src={WhaleSeaImage} 
           alt="Whale and Seal" 
           style={{
             marginTop: '1.5rem',
