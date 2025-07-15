@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { startFallingPetals } from '@/assets/animations/fallingPetals';
@@ -20,15 +20,24 @@ import Timeline from '@/layout/Timeline/Timeline.tsx';
 function App() {
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
   const [isTimelineOpen, setIsTimelineOpen] = useState(false);
-  const sectionRefs = {
-    main: useRef<HTMLElement | null>(null),
-    invitation: useRef<HTMLElement | null>(null),
-    gallery: useRef<HTMLElement | null>(null),
-    liveStream: useRef<HTMLElement | null>(null),
-    giftInfo: useRef<HTMLElement | null>(null),
-    directions: useRef<HTMLElement | null>(null),
-    messages: useRef<HTMLElement | null>(null),
-  };
+  
+  const mainRef = useRef<HTMLElement | null>(null);
+  const invitationRef = useRef<HTMLElement | null>(null);
+  const galleryRef = useRef<HTMLElement | null>(null);
+  const liveStreamRef = useRef<HTMLElement | null>(null);
+  const giftInfoRef = useRef<HTMLElement | null>(null);
+  const directionsRef = useRef<HTMLElement | null>(null);
+  const messagesRef = useRef<HTMLElement | null>(null);
+  
+  const sectionRefs = useMemo(() => ({
+    main: mainRef,
+    invitation: invitationRef,
+    gallery: galleryRef,
+    liveStream: liveStreamRef,
+    giftInfo: giftInfoRef,
+    directions: directionsRef,
+    messages: messagesRef,
+  }), []);
 
   useEffect(() => {
     // Detect device type for optimized observer settings
@@ -80,37 +89,50 @@ function App() {
   useEffect(() => {
     // Detect iOS devices
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     // Skip animation entirely on iOS devices to prevent crashes
     if (isIOS) {
       return;
     }
     
-    // Very conservative settings for other mobile devices
-    const petalConfig = {
-      density: isMobile ? 8 : 15, // Much lower density for mobile
-      sizeRange: [1, 3] as [number, number], // Smaller petals
-      speedRange: [0.3, 0.8] as [number, number], // Slower movement
-      color: 'rgba(255, 182, 193, 0.6)', // Lower opacity
-    };
+    // Add a small delay to prevent immediate execution issues
+    const timer = setTimeout(() => {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      // Very conservative settings for other mobile devices
+      const petalConfig = {
+        density: isMobile ? 8 : 15, // Much lower density for mobile
+        sizeRange: [1, 3] as [number, number], // Smaller petals
+        speedRange: [0.3, 0.8] as [number, number], // Slower movement
+        color: 'rgba(255, 182, 193, 0.6)', // Lower opacity
+      };
+      
+      try {
+        const cleanup = startFallingPetals(petalConfig);
+        return cleanup;
+      } catch (error) {
+        console.warn('Failed to start falling petals:', error);
+        return undefined;
+      }
+    }, 100);
     
-    const cleanup = startFallingPetals(petalConfig);
-    return cleanup;
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
     <Container>
-      <Wrapper id="main" ref={sectionRefs.main} data-aos="fade-up">
+      <Wrapper id="main" ref={mainRef} data-aos="fade-up">
         <Main />
       </Wrapper>
       <hr className="separator" />
-      <Wrapper id="invitation" ref={sectionRefs.invitation} data-aos="fade-up">
+      <Wrapper id="invitation" ref={invitationRef} data-aos="fade-up">
         <Heading1>Invitation</Heading1>
         <Invitation />
       </Wrapper>
       <hr className="separator" />
-      <Wrapper id="directions" ref={sectionRefs.directions} data-aos="fade-up">
+      <Wrapper id="directions" ref={directionsRef} data-aos="fade-up">
         <Heading1>Place & Time</Heading1>
         <Location />
       </Wrapper>
@@ -120,22 +142,22 @@ function App() {
         <Timeline isCollapsed={!isTimelineOpen} onExpand={() => setIsTimelineOpen(true)} />
       </Wrapper>
       <hr className="separator" />
-      <Wrapper id="liveStream" ref={sectionRefs.liveStream} data-aos="fade-up">
+      <Wrapper id="liveStream" ref={liveStreamRef} data-aos="fade-up">
         <Heading1>Live Stream</Heading1>
         <YouTubeLiveStream />
       </Wrapper>
       <hr className="separator" />
-      <Wrapper id="giftInfo" ref={sectionRefs.giftInfo} data-aos="fade-up">
+      <Wrapper id="giftInfo" ref={giftInfoRef} data-aos="fade-up">
         <Heading1>Gift Information</Heading1>
         <Account />
       </Wrapper>
       <hr className="separator" />
-      <Wrapper id="messages" ref={sectionRefs.messages} data-aos="fade-up">
+      <Wrapper id="messages" ref={messagesRef} data-aos="fade-up">
         <Heading1>Messages to the Couple</Heading1>
         <Guestbook />
       </Wrapper>
       <hr className="separator" />
-      <Wrapper id="gallery" ref={sectionRefs.gallery} data-aos="fade-up">
+      <Wrapper id="gallery" ref={galleryRef} data-aos="fade-up">
         <Heading1>Gallery</Heading1>
         <GalleryWrap />
       </Wrapper>
