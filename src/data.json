@@ -32,13 +32,13 @@
   },
   "hostInfo": [
     {
-      "host": "Bride's Account",
+      "host": "Bride's Bank Account",
       "accountInfo": [
         {
-          "name": "Debbie Hartono",
-          "relation": "Bride",
-          "bank": "BCA",
-          "account": "1234-5678-9012",
+          "name": "Debbie Fiona",
+          "relation": "",
+          "bank": "Blu/ BCA Digital ",
+          "account": "005734429248",
           "kakaopayAccount": "",
           "tossAccount": ""
         }
