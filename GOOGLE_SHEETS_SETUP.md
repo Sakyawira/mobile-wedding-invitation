@@ -93,10 +93,30 @@ const GuestbookDisplay = () => {
 ```
 
 ## Troubleshooting
+- **401 Unauthorized**: Most common issue! Check these in order:
+  1. **API Key Issues**:
+     - Make sure your API key is correct (no extra spaces)
+     - Verify the API key is enabled for Google Sheets API
+     - Check if API key has any restrictions that might block your domain
+  2. **Spreadsheet Permissions**:
+     - Spreadsheet MUST be public ("Anyone with the link can view")
+     - Spreadsheet ID should be the long string from the URL
+  3. **Quick Test**: Try this URL in your browser (replace with your values):
+     ```
+     https://sheets.googleapis.com/v4/spreadsheets/YOUR_SPREADSHEET_ID/values/Sheet1!A1:C1?key=YOUR_API_KEY
+     ```
+     If this returns JSON data, your setup is correct!
+
 - **403 Forbidden**: Check API key restrictions and spreadsheet permissions
 - **400 Bad Request**: Verify spreadsheet ID is correct
 - **CORS Issues**: Make sure API key has proper HTTP referrer restrictions
 - **Rate Limiting**: Add delays between requests if hitting quotas
+
+## Manual Testing Steps (if you get 401):
+1. Open browser dev tools → Console
+2. Try submitting a message
+3. Check the console logs for detailed error information
+4. Verify the API key and spreadsheet ID are being read correctly
 
 ## Cost
 - Google Sheets API is free for most use cases

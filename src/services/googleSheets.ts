@@ -1,69 +1,82 @@
-// Google Sheets API service
+// Google Forms service - no API key needed!
 interface GuestbookEntry {
   name: string;
   message: string;
   timestamp: string;
 }
 
-interface GoogleSheetsResponse {
-  values?: string[][];
-}
-
-class GoogleSheetsService {
-  private readonly apiKey: string;
-  private readonly spreadsheetId: string;
-  private readonly range: string = 'Sheet1!A:C'; // Name, Message, Timestamp
+class GoogleFormsService {
+  private readonly formUrl: string;
+  private readonly nameFieldId: string;
+  private readonly messageFieldId: string;
 
   constructor() {
-    this.apiKey = (import.meta.env.VITE_GOOGLE_SHEETS_API_KEY as string) || '';
-    this.spreadsheetId = (import.meta.env.VITE_GOOGLE_SHEETS_SPREADSHEET_ID as string) || '';
+    // These come from your Google Form
+    this.formUrl = (import.meta.env.VITE_GOOGLE_FORM_URL as string) || '';
+    this.nameFieldId = (import.meta.env.VITE_GOOGLE_FORM_NAME_FIELD_ID as string) || '';
+    this.messageFieldId = (import.meta.env.VITE_GOOGLE_FORM_MESSAGE_FIELD_ID as string) || '';
   }
 
   async appendEntry(entry: GuestbookEntry): Promise<boolean> {
     try {
-      const response = await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${this.spreadsheetId}/values/${this.range}:append?valueInputOption=USER_ENTERED&key=${this.apiKey}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            values: [[entry.name, entry.message, entry.timestamp]],
-          }),
-        }
-      );
+      console.log('Attempting to submit to Google Form:', entry);
+      
+      // Create form data
+      const formData = new FormData();
+      formData.append(`entry.${this.nameFieldId}`, entry.name);
+      formData.append(`entry.${this.messageFieldId}`, entry.message);
+      
+      const response = await fetch(this.formUrl, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors' // Important for Google Forms
+      });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
+      console.log('Form submission response status:', response.status);
+      
+      // With no-cors, we can't read the response, but if no error is thrown, it worked
       return true;
     } catch (error) {
-      console.error('Error appending to Google Sheets:', error);
+      console.error('Error submitting to Google Form:', error);
       return false;
     }
   }
 
+  // For reading, we'll use the public CSV export of the Google Sheet
   async getEntries(): Promise<GuestbookEntry[]> {
     try {
-      const response = await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${this.spreadsheetId}/values/${this.range}?key=${this.apiKey}`
-      );
+      const spreadsheetId = (import.meta.env.VITE_GOOGLE_SHEET_ID as string) || '';
+      
+      if (!spreadsheetId) {
+        console.warn('No spreadsheet ID configured for reading entries');
+        return [];
+      }
 
+      // Google Sheets public CSV export URL
+      const csvUrl = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/export?format=csv&gid=0`;
+      
+      const response = await fetch(csvUrl);
+      
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const data = await response.json() as GoogleSheetsResponse;
-      const rows = data.values ?? [];
-
-      // Skip header row if it exists
-      const entries: GuestbookEntry[] = rows.slice(1).map((row: string[]) => ({
-        name: row[0] || '',
-        message: row[1] || '',
-        timestamp: row[2] || '',
-      }));
+      const csvText = await response.text();
+      const lines = csvText.split('\n');
+      
+      // Skip header row and parse CSV
+      const entries: GuestbookEntry[] = lines.slice(1)
+        .filter(line => line.trim())
+        .map(line => {
+          const [timestamp, name, message] = line.split(',').map(cell => 
+            cell.replace(/"/g, '').trim()
+          );
+          return {
+            name: name || '',
+            message: message || '', 
+            timestamp: timestamp || ''
+          };
+        });
 
       return entries;
     } catch (error) {
@@ -73,5 +86,5 @@ class GoogleSheetsService {
   }
 }
 
-export const googleSheetsService = new GoogleSheetsService();
+export const googleSheetsService = new GoogleFormsService();
 export type { GuestbookEntry };
