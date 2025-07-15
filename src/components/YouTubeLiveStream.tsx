@@ -4,7 +4,7 @@ const YouTubeLiveStream = () => {
   return (
     <Wrapper>
       <StyledIframe
-        src="https://www.youtube.com/embed/live_stream?channel=UC6eh_JZFR8O9w-de4sIjR5g"
+        src="https://www.youtube-nocookie.com/embed/_GQr5ciW8JI?si=hucyuZGTTEEGYthF&amp;"
         title="YouTube Live Stream"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
