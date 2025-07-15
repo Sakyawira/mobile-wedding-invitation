@@ -1,7 +1,7 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import data from 'data.json';
-import mainImg from '@/assets/images/05.jpg';
+import mainImg from '@/assets/images/compressed/05.jpg';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }

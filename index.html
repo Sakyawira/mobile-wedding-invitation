@@ -5,7 +5,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <!-- iOS specific meta tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- Performance optimization for mobile -->
+    <meta name="theme-color" content="#ffffff">
+    <meta name="msapplication-tap-highlight" content="no">
+    
     <title>Sakya & Debbie's Wedding</title>
     <meta name="description" content="2024년 2월 17일 (토) 14:00 아펠가모 공덕 라로브홀">
 
@@ -14,6 +25,9 @@
     <meta property="og:title" content="Sakya & Debbie's Wedding">
     <meta name="description" property="og:description" content="2024년 2월 17일 (토) 14:00 아펠가모 공덕 라로브홀">
     <meta property="og:image" content="/thumbnail.jpg">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/background.png" as="image">
   </head>
   <body>
     <div id="root"></div>

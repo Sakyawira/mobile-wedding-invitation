@@ -31,6 +31,10 @@ function App() {
   };
 
   useEffect(() => {
+    // Detect device type for optimized observer settings
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -39,7 +43,10 @@ function App() {
           }
         });
       },
-      { threshold: 0.1 },
+      { 
+        threshold: isIOS ? 0.05 : isMobile ? 0.08 : 0.1, // Lower threshold for iOS
+        rootMargin: isIOS ? '50px' : '20px' // Larger margin for iOS to trigger earlier
+      },
     );
 
     Object.values(sectionRefs).forEach((ref) => {
@@ -58,21 +65,38 @@ function App() {
   }, [sectionRefs]);
 
   useEffect(() => {
+    // Detect device type for optimized AOS settings
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
     AOS.init({
-      duration: 1000, // Animation duration in milliseconds
+      duration: isIOS ? 600 : isMobile ? 800 : 1000, // Shorter animations for iOS
       once: true, // Whether animation should happen only once
+      disable: isIOS && window.innerWidth < 768, // Disable AOS on small iOS devices
+      throttleDelay: isIOS ? 100 : 50, // Throttle scroll events more on iOS
     });
   }, []);
 
   useEffect(() => {
-    // Start falling petals with device-optimized settings
-    const cleanup = startFallingPetals({
-      density: 30, // Reasonable default - will be automatically adjusted based on device
-      sizeRange: [2, 6], // Smaller base sizes for more delicate effect
-      speedRange: [0.5, 1.5], // Slower for better visibility
-      color: 'rgba(255, 182, 193, 0.9)', // Higher opacity for mobile
-    });
-    return cleanup; // Ensure proper cleanup when the component unmounts
+    // Detect iOS devices
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Skip animation entirely on iOS devices to prevent crashes
+    if (isIOS) {
+      return;
+    }
+    
+    // Very conservative settings for other mobile devices
+    const petalConfig = {
+      density: isMobile ? 8 : 15, // Much lower density for mobile
+      sizeRange: [1, 3] as [number, number], // Smaller petals
+      speedRange: [0.3, 0.8] as [number, number], // Slower movement
+      color: 'rgba(255, 182, 193, 0.6)', // Lower opacity
+    };
+    
+    const cleanup = startFallingPetals(petalConfig);
+    return cleanup;
   }, []);
 
   return (

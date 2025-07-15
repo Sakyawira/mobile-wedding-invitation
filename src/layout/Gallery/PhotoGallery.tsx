@@ -10,6 +10,12 @@ const PhotoGallery = () => {
     height: '150px',
   };
 
+  // Detect iOS for optimized image loading
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  
+  // Limit images on iOS to prevent crashes
+  const displayImages = isIOS ? images.slice(0, 8) : images;
+
   return (
     <Gallery>
       <div
@@ -18,7 +24,7 @@ const PhotoGallery = () => {
           gridTemplateColumns: 'repeat(3, 0fr)',
           gridGap: 2,
         }}>
-        {images.map((image, index) => {
+        {displayImages.map((image, index) => {
           return (
             <Item
               key={index}
@@ -34,6 +40,8 @@ const PhotoGallery = () => {
                   src={image.source}
                   ref={ref as React.MutableRefObject<HTMLImageElement>}
                   onClick={open}
+                  loading="lazy" // Add lazy loading for better performance
+                  decoding="async" // Async decoding for better performance
                 />
               )}
             </Item>
