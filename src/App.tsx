@@ -114,6 +114,58 @@ function App() {
         <Heading1>Gallery</Heading1>
         <GalleryWrap />
       </Wrapper>
+      <hr className="separator" style={{ marginBottom: '10px' }} />
+      <Wrapper id="thankyou" data-aos="fade-up">
+        <div style={{ 
+          textAlign: 'center', 
+          padding: '0.25rem 1rem 1.5rem 1rem', 
+          color: '#8B4513',
+          fontFamily: 'serif',
+          maxWidth: '100%',
+          overflow: 'hidden'
+        }}>
+          <Heading1 style={{ 
+            marginBottom: '1.5rem',
+            fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+            wordBreak: 'break-word'
+          }}>Thank You!</Heading1>
+          <p style={{ 
+            fontSize: 'clamp(0.9rem, 3vw, 1.1rem)', 
+            lineHeight: '1.6', 
+            maxWidth: '90%', 
+            margin: '0 auto',
+            marginBottom: '1rem',
+            wordBreak: 'break-word',
+            hyphens: 'auto'
+          }}>
+            Thank you for reading all the way here! Your presence in our lives means the world to us.
+          </p>
+          <p style={{ 
+            fontSize: 'clamp(1rem, 3.5vw, 1.2rem)', 
+            fontWeight: 'bold',
+            color: '#D2691E',
+            wordBreak: 'break-word',
+            maxWidth: '90%',
+            margin: '0 auto'
+          }}>
+            We hope to see you soon! 💕
+          </p>
+        <img 
+          src="/whaleseal.png" 
+          alt="Whale and Seal" 
+          style={{
+            marginTop: '1.5rem',
+            maxWidth: '220px',
+            width: '60%',
+            height: 'auto',
+            display: 'block',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            opacity: 0.95
+          }}
+        />
+      </div>
+    </Wrapper>
       <FloatingBar isVisible={Object.values(visibleSections).some(Boolean)} />
     </Container>
   );
