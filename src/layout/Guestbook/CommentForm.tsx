@@ -1,23 +1,52 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
-// import { push, ref, serverTimestamp } from 'firebase/database';
-// import { realtimeDb } from '../../firebase.ts';
-
-// TODO: 방명록 기능 사용시, realtime db에 guestbook 추가
-// const guestbookRef = ref(realtimeDb, 'guestbook');
+import { googleSheetsService } from '../../services/googleSheets';
 
 const CommentForm = () => {
   const [name, setName] = useState<string>('');
   const [message, setMessage] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    if (!name || !message) {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    if (!name.trim() || !message.trim()) {
       alert('Please fill in your name and message. 😢');
-    } else {
-      e.preventDefault();
-      // TODO: Save name, message, creation time, and date.
-      setName('');
-      setMessage('');
+      return;
+    }
+
+    // Basic validation
+    if (name.length > 50) {
+      alert('Name must be less than 50 characters. 😅');
+      return;
+    }
+    
+    if (message.length > 500) {
+      alert('Message must be less than 500 characters. 😅');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const success = await googleSheetsService.appendEntry({
+        name: name.trim(),
+        message: message.trim(),
+        timestamp: new Date().toISOString(),
+      });
+
+      if (success) {
+        setName('');
+        setMessage('');
+        alert('Thank you for your message! 💝');
+      } else {
+        alert('Sorry, there was an error submitting your message. Please try again. 😢');
+      }
+    } catch (error) {
+      console.error('Error submitting message:', error);
+      alert('Sorry, there was an error submitting your message. Please try again. 😢');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -34,7 +63,9 @@ const CommentForm = () => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      <SubmitButton type="submit">Submit</SubmitButton>
+      <SubmitButton type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Submitting...' : 'Submit'}
+      </SubmitButton>
     </FormWrapper>
   );
 };
@@ -86,5 +117,19 @@ const SubmitButton = styled.button`
   font-family: inherit;
   font-weight: inherit;
   color: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background-color: #f5f5f5;
+    border-color: #999;
+  }
+
+  &:disabled {
+    background-color: #f0f0f0;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
 `;
 export default CommentForm;
