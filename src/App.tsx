@@ -149,8 +149,30 @@ function App() {
       <hr className="separator" />
       <Wrapper id="giftInfo" ref={giftInfoRef} data-aos="fade-up">
         <Heading1>Gift Information</Heading1>
+        <div style={{ 
+          textAlign: 'center', 
+          padding: '1rem', 
+          color: '#8B4513',
+          fontFamily: 'serif',
+          maxWidth: '100%',
+          overflow: 'hidden'
+        }}>
+          <p style={{ 
+            fontSize: 'clamp(0.8rem, 2.5vw, 1rem)', 
+            lineHeight: '1.4', 
+            maxWidth: '95%', 
+            margin: '0 auto',
+            wordBreak: 'break-word',
+            hyphens: 'auto',
+            color: '#8B4513',
+            fontStyle: 'italic'
+          }}>
+            For our Indonesian friends who wish to send gifts
+          </p>
+        </div>
         <Account />
       </Wrapper>
+
       <hr className="separator" />
       <Wrapper id="messages" ref={messagesRef} data-aos="fade-up">
         <Heading1>Messages to the Couple</Heading1>
