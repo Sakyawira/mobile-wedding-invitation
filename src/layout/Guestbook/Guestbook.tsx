@@ -6,7 +6,7 @@ const Guestbook = () => {
   return (
     <GuestBookWrapper>
       <Heading2>
-        Kami mohon untuk menuliskan nama dan klik 'submit' untuk mengonfirmasi kehadiran Anda.
+        Kami mohon konfirmasi nama dan jumlah yang hadir bersama anda. Setelah diisi, tolong klik 'Submit'.
       </Heading2>
       <CommentForm />
     </GuestBookWrapper>

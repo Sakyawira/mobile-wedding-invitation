@@ -56,12 +56,12 @@ const CommentForm = () => {
         placeholder="Nama"
         type="text"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => setName(e.target.value.toString())}
       />
       <MessageInput
-        placeholder="Catatan untuk kami..."
+        placeholder="Jumlah yang hadir bersama saya"
         value={message}
-        onChange={(e) => setMessage(e.target.value)}
+        onChange={(e) => setMessage(e.target.value.toString)}
       />
       <SubmitButton type="submit" disabled={isSubmitting}>
         {isSubmitting ? 'Submitting...' : 'Submit'}
