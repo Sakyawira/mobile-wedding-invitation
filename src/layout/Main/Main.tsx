@@ -13,8 +13,13 @@ const Main = () => {
   
   // Extract name parameter from URL
   const urlParams = new URLSearchParams(window.location.search);
-  const name = urlParams.get('name');
-  
+  let name = urlParams.get('name');
+
+  // Insert space between capitalized letters (e.g., SakyaRuslim -> Sakya Ruslim)
+  if (name) {
+    name = name.replace(/([a-z])([A-Z])/g, '$1 $2');
+  }
+
   // Create dynamic title
   const dynamicTitle = name 
     ? `Yang terhormat, ${name}`
