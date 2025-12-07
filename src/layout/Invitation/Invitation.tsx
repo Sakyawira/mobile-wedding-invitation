@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import data from 'data.json';
-import Host from '../Contact/Host.tsx';
 import { Paragraph } from '@/components/Text.tsx';
 
 const Invitation = () => {
@@ -35,7 +34,6 @@ const Invitation = () => {
   return (
     <InvitationWrapper>
       <StyledParagraph>{greeting.message}</StyledParagraph>
-      {/* <Host /> */}
     </InvitationWrapper>
   );
 };

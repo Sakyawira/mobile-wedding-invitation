@@ -2,24 +2,18 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { startFallingPetals } from '@/assets/animations/fallingPetals';
-import WhaleSeaImage from '@/assets/images/whaleseal.png';
 
 import { Heading1 } from '@/components/Text.tsx';
 import Wrapper from '@/components/Wrapper.tsx';
-import YouTubeLiveStream from '@/components/YouTubeLiveStream.tsx';
-import Account from '@/layout/Account/Account.tsx';
 import Container from '@/layout/Container.tsx';
 import FloatingBar from '@/layout/FloatingBar/FloatingBar.tsx';
-import GalleryWrap from '@/layout/Gallery/GalleryWrap.tsx';
 import Guestbook from '@/layout/Guestbook/Guestbook.tsx';
 import Invitation from '@/layout/Invitation/Invitation.tsx';
 import Location from '@/layout/Location/Location.tsx';
 import Main from '@/layout/Main/Main.tsx';
-import Timeline from '@/layout/Timeline/Timeline.tsx';
 
 function App() {
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
-  const [isTimelineOpen, setIsTimelineOpen] = useState(false);
   
   const mainRef = useRef<HTMLElement | null>(null);
   const invitationRef = useRef<HTMLElement | null>(null);
@@ -43,7 +37,6 @@ function App() {
     // Detect device type for optimized observer settings
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -124,8 +117,8 @@ function App() {
   return (
     <Container>
       <Wrapper id="main" ref={mainRef} data-aos="fade-up">
-          <Main />
-        </Wrapper>
+        <Main />
+      </Wrapper>
       <hr className="separator" />
       <Wrapper id="invitation" ref={invitationRef} data-aos="fade-up">
         <Heading1>Undangan</Heading1>
@@ -136,53 +129,11 @@ function App() {
         <Heading1>Tempat & Waktu</Heading1>
         <Location />
       </Wrapper>
-      {/* <hr className="separator" /> */}
-      {/* <Wrapper id="timeline" data-aos="fade-up">
-        <Heading1>Our Story Timeline</Heading1>
-        <Timeline isCollapsed={!isTimelineOpen} onExpand={() => setIsTimelineOpen(true)} />
-      </Wrapper> */}
-      {/* <hr className="separator" /> */}
-      {/* <Wrapper id="liveStream" ref={liveStreamRef} data-aos="fade-up">
-        <Heading1>Live Stream</Heading1>
-        <YouTubeLiveStream />
-      </Wrapper>
-      <hr className="separator" /> */}
-      {/* <Wrapper id="giftInfo" ref={giftInfoRef} data-aos="fade-up">
-        <Heading1>Gift Information</Heading1>
-        <div style={{ 
-          textAlign: 'center', 
-          padding: '1rem', 
-          color: '#8B4513',
-          fontFamily: 'serif',
-          maxWidth: '100%',
-          overflow: 'hidden'
-        }}>
-          <p style={{ 
-            fontSize: 'clamp(0.8rem, 2.5vw, 1rem)', 
-            lineHeight: '1.4', 
-            maxWidth: '95%', 
-            margin: '0 auto',
-            wordBreak: 'break-word',
-            hyphens: 'auto',
-            color: '#8B4513',
-            fontStyle: 'italic'
-          }}>
-            For our Indonesian friends who wish to send gifts
-          </p>
-        </div>
-        <Account />
-      </Wrapper> */}
-
       <hr className="separator" />
       <Wrapper id="messages" ref={messagesRef} data-aos="fade-up">
         <Heading1>Kofirmasi Kedatangan</Heading1>
         <Guestbook />
       </Wrapper>
-      {/* <hr className="separator" />
-      <Wrapper id="gallery" ref={galleryRef} data-aos="fade-up">
-        <Heading1>Gallery</Heading1>
-        <GalleryWrap />
-      </Wrapper> */}
       <hr className="separator" style={{ marginBottom: '10px' }} />
       <Wrapper id="thankyou" data-aos="fade-up">
         <div style={{ 
