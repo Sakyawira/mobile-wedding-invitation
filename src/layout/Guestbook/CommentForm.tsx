@@ -38,13 +38,13 @@ const CommentForm = () => {
       if (success) {
         setName('');
         setMessage('');
-        alert('Thank you for your message! 💝');
+        alert('Terima kasih sudah mengonfirmasi! 💝');
       } else {
-        alert('Sorry, there was an error submitting your message. Please try again. 😢');
+        alert('Maaf, terjadi kesalahan saat mengonfirmasi. Silakan coba lagi. 😢');
       }
     } catch (error) {
       console.error('Error submitting message:', error);
-      alert('Sorry, there was an error submitting your message. Please try again. 😢');
+      alert('Maaf, terjadi kesalahan saat mengonfirmasi. Silakan coba lagi. 😢');
     } finally {
       setIsSubmitting(false);
     }
@@ -53,13 +53,13 @@ const CommentForm = () => {
   return (
     <FormWrapper onSubmit={handleSubmit}>
       <NameInput
-        placeholder="Name"
+        placeholder="Nama"
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <MessageInput
-        placeholder="Message"
+        placeholder="Catatan untuk kami..."
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />

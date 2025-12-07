@@ -1,7 +1,7 @@
 {
   "greeting": {
     "title": "Sakyawira 💍 Debbie\nWe are getting married!",
-    "message": "To our dear ones who have always warmed us with their love.\nWe invite you to share the precious moment of our first step as a married couple.\n\nYou'll find all the details about when and where below. And if you can't make it in person, no worries—there will be a livestream link so you can celebrate with us from anywhere!",
+    "message": "Dengan hormat dan penuh rasa syukur, Kami, Djajadi dan Silvi Octavia Wijaya, bermaksud mengundang koko, cici, adik, serta keponakan untuk hadir dalam acara perkenalan keluarga antara Sakyawira Nanda Ruslim dan Debbie Fiona Hartono. Acara ini akan berlangsung dalam suasana kekeluargaan, diawali dengan ucapan selamat datang, dilanjutkan dengan perkenalan kedua mempelai, rangkaian tea pai, dan ditutup dengan santap siang bersama.",
     "host": {
       "groom": {
         "name": "Sakyawira Ruslim",
@@ -28,7 +28,7 @@
         ]
       }
     },
-    "eventDetail": "August 16, 2025 (Saturday) 15:30"
+    "eventDetail": "February 14, 2025 (Saturday) 10:30"
   },
   "hostInfo": [
     {
@@ -46,20 +46,20 @@
     }
   ],
   "mapInfo": {
-    "address1": "Cox's Bay Pavillion Hall",
-    "address2": "40 Kingsley Street, Westmere, Auckland 1022, New Zealand",
-    "googleMap": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3192.578970161224!2d174.7206804!3d-36.8525583!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d47ad31af6991%3A0xce879c376d6703ba!2sCox's%20Bay%20Pavillion%20Hall!5e0!3m2!1sen!2snz!4v1749964637684!5m2!1sen!2snz",
-    "lat": -36.8525583,
-    "lon": 174.7206804
+    "address1": "Swiss-Belinn Hotel Bogor",
+    "address2": "Jl. Pajajaran Indah V No.1, RT.01/RW.14, Baranangsiang, Kec. Bogor Tim., Kota Bogor, Jawa Barat 16143, Indonesia",
+    "googleMap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.2934792286314!2d106.81182091253743!3d-6.610409493356006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c51aad941429%3A0xf0140abb97c5413a!2sSwiss-Belinn%20Bogor!5e0!3m2!1sid!2snz!4v1765079088050!5m2!1sid!2snz",    
+    "lat": -6.610409493356006,
+    "lon": 106.81182091253743
   },
   "locationInfo": [
     {
-      "title": "📅 Time",
-      "desc": "August 16, 2025 (Saturday) 15:30 NZT"
+      "title": "📅 Waktu",
+      "desc": "February 14, 2025 (Saturday) 10:30-13:00 WIB"
     },
     {
-      "title": "📍 Place",
-      "desc": "Cox's Bay Pavillion Hall, 40 Kingsley Street, Westmere, Auckland 1022, New Zealand."
+      "title": "📍 Tempat",
+      "desc": "Swiss-Belinn Hotel Bogor, Jl. Pajajaran Indah V No.1, RT.01/RW.14, Baranangsiang, Kec. Bogor Tim., Kota Bogor, Jawa Barat 16143, Indonesia"
     }
   ],
   "emojis": [

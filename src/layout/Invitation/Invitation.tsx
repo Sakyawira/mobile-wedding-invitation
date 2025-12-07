@@ -35,7 +35,7 @@ const Invitation = () => {
   return (
     <InvitationWrapper>
       <StyledParagraph>{greeting.message}</StyledParagraph>
-      <Host />
+      {/* <Host /> */}
     </InvitationWrapper>
   );
 };

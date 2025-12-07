@@ -26,7 +26,7 @@ body {
   min-width: 280px;
   display: flex;
   justify-content: center;
-  background-color: #E0E7D9;
+  background-color: #af3331;
   
   /* Performance optimizations for mobile */
   overflow-x: hidden;

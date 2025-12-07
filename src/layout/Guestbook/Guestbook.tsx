@@ -6,9 +6,7 @@ const Guestbook = () => {
   return (
     <GuestBookWrapper>
       <Heading2>
-        Please leave a message.
-        <br />
-        After the wedding, it will be delivered to the bride and groom.
+        Kami mohon untuk menuliskan nama dan klik 'submit' untuk mengonfirmasi kehadiran Anda.
       </Heading2>
       <CommentForm />
     </GuestBookWrapper>

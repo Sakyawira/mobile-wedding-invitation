@@ -124,30 +124,30 @@ function App() {
   return (
     <Container>
       <Wrapper id="main" ref={mainRef} data-aos="fade-up">
-        <Main />
-      </Wrapper>
+          <Main />
+        </Wrapper>
       <hr className="separator" />
       <Wrapper id="invitation" ref={invitationRef} data-aos="fade-up">
-        <Heading1>Invitation</Heading1>
+        <Heading1>Undangan</Heading1>
         <Invitation />
       </Wrapper>
       <hr className="separator" />
       <Wrapper id="directions" ref={directionsRef} data-aos="fade-up">
-        <Heading1>Place & Time</Heading1>
+        <Heading1>Tempat & Waktu</Heading1>
         <Location />
       </Wrapper>
-      <hr className="separator" />
-      <Wrapper id="timeline" data-aos="fade-up">
+      {/* <hr className="separator" /> */}
+      {/* <Wrapper id="timeline" data-aos="fade-up">
         <Heading1>Our Story Timeline</Heading1>
         <Timeline isCollapsed={!isTimelineOpen} onExpand={() => setIsTimelineOpen(true)} />
-      </Wrapper>
-      <hr className="separator" />
-      <Wrapper id="liveStream" ref={liveStreamRef} data-aos="fade-up">
+      </Wrapper> */}
+      {/* <hr className="separator" /> */}
+      {/* <Wrapper id="liveStream" ref={liveStreamRef} data-aos="fade-up">
         <Heading1>Live Stream</Heading1>
         <YouTubeLiveStream />
       </Wrapper>
-      <hr className="separator" />
-      <Wrapper id="giftInfo" ref={giftInfoRef} data-aos="fade-up">
+      <hr className="separator" /> */}
+      {/* <Wrapper id="giftInfo" ref={giftInfoRef} data-aos="fade-up">
         <Heading1>Gift Information</Heading1>
         <div style={{ 
           textAlign: 'center', 
@@ -171,18 +171,18 @@ function App() {
           </p>
         </div>
         <Account />
-      </Wrapper>
+      </Wrapper> */}
 
       <hr className="separator" />
       <Wrapper id="messages" ref={messagesRef} data-aos="fade-up">
-        <Heading1>Messages to the Couple</Heading1>
+        <Heading1>Kofirmasi Kedatangan</Heading1>
         <Guestbook />
       </Wrapper>
-      <hr className="separator" />
+      {/* <hr className="separator" />
       <Wrapper id="gallery" ref={galleryRef} data-aos="fade-up">
         <Heading1>Gallery</Heading1>
         <GalleryWrap />
-      </Wrapper>
+      </Wrapper> */}
       <hr className="separator" style={{ marginBottom: '10px' }} />
       <Wrapper id="thankyou" data-aos="fade-up">
         <div style={{ 
@@ -197,7 +197,7 @@ function App() {
             marginBottom: '1.5rem',
             fontSize: 'clamp(1.5rem, 4vw, 2rem)',
             wordBreak: 'break-word'
-          }}>Thank You!</Heading1>
+          }}>Terima Kasih!</Heading1>
           <p style={{ 
             fontSize: 'clamp(0.9rem, 3vw, 1.1rem)', 
             lineHeight: '1.6', 
@@ -207,7 +207,7 @@ function App() {
             wordBreak: 'break-word',
             hyphens: 'auto'
           }}>
-            Thank you for reading all the way here! Your presence in our lives means the world to us.
+            Dengan segala hormat, kami sangat mengharapkan kehadiran keluarga dalam acara ini sebagai bentuk dukungan dan restu bagi kedua mempelai.
           </p>
           <p style={{ 
             fontSize: 'clamp(1rem, 3.5vw, 1.2rem)', 
@@ -217,23 +217,21 @@ function App() {
             maxWidth: '90%',
             margin: '0 auto'
           }}>
-            We hope to see you soon! 💕
+            Hormat kami,
           </p>
-        <img 
-          src={WhaleSeaImage} 
-          alt="Whale and Seal" 
-          style={{
-            marginTop: '1.5rem',
-            maxWidth: '220px',
-            width: '60%',
-            height: 'auto',
-            display: 'block',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            opacity: 0.95
-          }}
-        />
-      </div>
+          <p style={{ 
+            fontSize: 'clamp(1rem, 3.5vw, 1.2rem)', 
+            fontWeight: 'bold',
+            color: '#D2691E',
+            wordBreak: 'break-word',
+            maxWidth: '90%',
+            margin: '0 auto'
+          }}>
+            Djajadi dan Silvi
+              <br></br>
+              ...
+          </p>
+        </div>
     </Wrapper>
       <FloatingBar isVisible={Object.values(visibleSections).some(Boolean)} />
     </Container>
